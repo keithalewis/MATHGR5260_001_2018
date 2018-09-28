@@ -1,12 +1,58 @@
 // GR5260.cpp - test program
 #include <cassert>
-#include "root1d.h"
+#include <algorithm>
+#include "fms_root1d_newton.h"
 #include "fms_black.h"
 
 using namespace fms;
 
 template<class X>
-void test_fms_black_value() {
+void test_fms_root1d_newton()
+{
+    size_t n = 0;
+    X a = X(5);
+    std::function<X(X)> f = [a](X x) { return x * x - a; };
+    std::function<X(X)> df = [](X x) { return 2 * x; };
+    X x0 = X(2);
+    root1d::newton_solver<X,X> ns(X(x0), f, df);
+
+    // by hand to see how many iterations
+    X x_;
+    do {
+        ++n;
+        x_ = ns.next();
+    } while (!ns.done());
+
+    // should get same solution
+    X x = ns.solve();
+    assert(x == x_);
+
+    bool thrown = false;
+    try {
+        root1d::newton_solver<X, X, 2>(X(x0), f, df).solve();
+    }
+    catch (...) {
+        thrown = true;
+    }
+    assert(thrown);
+}
+
+template<class X>
+std::vector<X> sequence(X start, X stop, X step = X(1))
+{
+    std::vector<X> v;
+
+    while (start < stop) {
+        v.push_back(start);
+        start += step;
+    }
+
+    return v;
+}
+
+template<class X>
+void test_fms_black_value() 
+{
     X f = X(100), sigma = X(.2), k = X(100), t = X(0.25);
 
     auto v = black::value(f, sigma, k, t);
@@ -28,18 +74,48 @@ void test_fms_black_delta()
     auto dv = (v_ - _v)/(2*eps);
     auto dv0 = black::delta(f, sigma, k, t);
 
-    int n = 0; //??? find the smallest n that make the following test pass
+    int n = 15; // 10
     assert (fabs(dv - dv0) < n*eps);
 }
+template<class X>
+void test_fms_black_vega()
+{
+    X f = X(100), sigma = X(.2), k = X(100), t = X(0.25);
+    X eps = sqrt(std::numeric_limits<X>::epsilon());
+
+    auto _v = black::value(f, sigma - eps, k, t);
+    auto v_ = black::value(f, sigma + eps, k, t);
+
+    auto dv = (v_ - _v) / (2 * eps);
+    auto dv0 = black::vega(f, sigma, k, t);
+
+    auto diff = dv - dv0;
+    auto nn = diff / eps;
+
+    int n = 5; // 3
+    assert(fabs(dv - dv0) < n*eps);
+}
+template<class X>
+void test_fms_black_implied()
+{
+    //??? Add test for Black implied volatility.
+}
+
 
 template<class X>
-void test_fms_black() {
+void test_fms_black() 
+{
     test_fms_black_value<X>();
     test_fms_black_delta<X>();
+    test_fms_black_vega<X>();
+    test_fms_black_implied<X>();
 }
 
 int main()
 {
+    test_fms_root1d_newton<double>();
+    test_fms_root1d_newton<float>();
+
     test_fms_black<double>();
     test_fms_black<float>();
 }
