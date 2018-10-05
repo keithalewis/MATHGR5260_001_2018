@@ -1,0 +1,895 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Keith Lewis</Author>
+  <LastAuthor>Keith Lewis</LastAuthor>
+  <Created>2018-10-05T03:16:51Z</Created>
+  <LastSaved>2018-10-05T03:25:35Z</LastSaved>
+  <Version>16.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <SupBook>
+   <Dll/>
+   <ExternName>
+    <Name>BLACK.IMPLIED</Name>
+    <Macro>Function</Macro>
+    <FunctionGroup>14</FunctionGroup>
+    <Formula>=#REF!</Formula>
+   </ExternName>
+   <ExternName>
+    <Name>BLACK.VALUE</Name>
+    <Macro>Function</Macro>
+    <FunctionGroup>14</FunctionGroup>
+    <Formula>=#REF!</Formula>
+   </ExternName>
+   <ExternName>
+    <Name>BLACK.VEGA</Name>
+    <Macro>Function</Macro>
+    <FunctionGroup>14</FunctionGroup>
+    <Formula>=#REF!</Formula>
+   </ExternName>
+  </SupBook>
+  <WindowHeight>10020</WindowHeight>
+  <WindowWidth>20520</WindowWidth>
+  <WindowTopX>32767</WindowTopX>
+  <WindowTopY>32767</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Names>
+  <NamedRange ss:Name="f" ss:RefersTo="=Sheet1!R2C3"/>
+  <NamedRange ss:Name="k" ss:RefersTo="=Sheet1!R4C3"/>
+  <NamedRange ss:Name="sigma" ss:RefersTo="=Sheet1!R3C3"/>
+  <NamedRange ss:Name="t" ss:RefersTo="=Sheet1!R5C3"/>
+ </Names>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="103" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="51" ss:DefaultRowHeight="14.25">
+   <Column ss:Index="8" ss:Width="68.625"/>
+   <Row ss:Index="2">
+    <Cell ss:Index="2"><Data ss:Type="String">f</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data><NamedCell ss:Name="f"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">sigma</Data></Cell>
+    <Cell><Data ss:Type="Number">0.2</Data><NamedCell ss:Name="sigma"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">k</Data></Cell>
+    <Cell><Data ss:Type="Number">100</Data><NamedCell ss:Name="k"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.01</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.19947093241847824</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.0000000000000271E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">-2.7061686225238191E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">t</Data></Cell>
+    <Cell><Data ss:Type="Number">0.25</Data><NamedCell ss:Name="t"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.02</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.39894061814816695</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.9999999999999907E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">9.3675067702747583E-17</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="3" ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, sigma, k, t)"><Data
+      ss:Type="Number">3.987761167674492</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.03</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.59840781052366765</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.0000000000000426E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">-4.2674197509029455E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="3" ss:ArrayRange="RC" ss:Formula="=BLACK.VEGA(f, sigma, k, t)"><Data
+      ss:Type="Number">19.922195704738201</Data></Cell>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.04</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.79787126292632138</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.9999999999999772E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">2.2898349882893854E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.05</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.99732972880759974</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.0000000000000246E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">-2.4286128663675299E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.06</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.1967819617124462</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.9999999999999803E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">1.9428902930940239E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">7.0000000000000007E-2</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.3962267153026957</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">6.9999999999999937E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.08</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.5956627433803945</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">7.9999999999999863E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">1.3877787807814457E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.09</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.79508879991117</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">8.9999999999999983E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">1.9945036390476076</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">9.9999999999999881E-2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">1.2490009027033011E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.11</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">2.1939060151525638</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.11000000000000024</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">-2.3592239273284576E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.12</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">2.3932946828225283</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.11999999999999988</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">1.1102230246251565E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.13</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">2.5926683969109732</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.12999999999999984</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.14000000000000001</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">2.792025912551658</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.14000000000000001</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.15</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">2.9913659851819503</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.14999999999999977</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">2.2204460492503131E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.16</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.1906873705661525</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.16000000000000017</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.17</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.3899888248187651</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.17000000000000007</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.18</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.5892691044278067</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.18000000000000002</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.19</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.7885269662780985</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.18999999999999945</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">5.5511151231257827E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">3.987761167674492</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.2</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.21</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">4.1869704663651319</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.21000000000000013</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.22</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">4.3861536205646985</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.21999999999999995</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.23</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">4.5853093889776417</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.23000000000000004</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.24</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">4.7844365308213668</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.23999999999999974</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">2.4980018054066022E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.25</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">4.983533805849433</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.2499999999999995</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">4.9960036108132044E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.26</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.1825999743747531</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.25999999999999984</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.27</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.3816337972926789</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.26999999999999985</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.28000000000000003</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.5806340361042288</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.28000000000000008</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.28999999999999998</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.7795994529391095</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.28999999999999998</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">5.9785288105789434</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.29999999999999982</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.31</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">6.1774208724802335</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.30999999999999989</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.32</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">6.3762744027974705</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.3199999999999999</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.33</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">6.5750881664061538</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.33000000000000007</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.34</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">6.7738609289258349</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.34</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.35</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">6.9725914567430749</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.35000000000000003</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.36</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">7.1712785170344233</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.36000000000000032</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.37</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">7.3699208777893759</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.37</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.38</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">7.568517307833261</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.37999999999999989</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.39</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">7.7670665768501834</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.39000000000000046</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">-4.4408920985006262E-16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.4</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">7.9655674554058038</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.40000000000000041</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.41</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">8.1640187149702541</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.40999999999999975</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.42</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">8.3624191279409317</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.4200000000000001</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.43</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">8.5607674676652294</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.4300000000000001</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.44</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">8.7590625084633658</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.44000000000000017</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.45</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">8.957303025651008</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.45000000000000018</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.46</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">9.1554877955620455</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.45999999999999974</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.47</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">9.3536155955712417</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.47000000000000008</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.48</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">9.5516852041167724</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.47999999999999993</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.49</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">9.7496954007229277</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.49000000000000021</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">9.9476449660225796</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.50000000000000044</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.51</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">10.145532681779784</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.50999999999999934</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.52</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">10.343357330912227</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.52000000000000024</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.53</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">10.541117697513648</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.5299999999999998</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.54</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">10.738812566876348</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.54000000000000081</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.55000000000000004</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">10.936440725513435</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.5500000000000006</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.56000000000000005</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">11.134000961181286</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.55999999999999983</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.56999999999999995</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">11.331492062901823</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.57000000000000028</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.57999999999999996</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">11.528912820984694</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.57999999999999985</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.59</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">11.726262027049629</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.58999999999999975</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">11.923538474048499</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.61</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">12.12074095628752</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.60999999999999976</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.62</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">12.31786826944937</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.62</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.63</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">12.514919210615169</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.63000000000000012</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.64</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">12.711892578286573</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.6399999999999999</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.65</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">12.908787172407685</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.65000000000000036</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.66</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">13.105601794387034</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.65999999999999992</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.67</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">13.302335247119409</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.67</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.68</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">13.498986335007686</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.6799999999999996</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.69</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">13.695553863984649</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.6899999999999995</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.7</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">13.89203664153473</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.69999999999999962</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.71</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">14.088433476715664</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.7100000000000003</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.72</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">14.284743180180143</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.72</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.73</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">14.480964564197436</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.73000000000000043</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.74</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">14.67709644267488</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.74000000000000044</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.75</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">14.873137631179432</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.74999999999999978</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.76</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">15.069086946959104</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.76000000000000012</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.77</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">15.264943208964226</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.76999999999999946</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.78</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">15.460705237869021</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.7799999999999998</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.79</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">15.656371856092647</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.7899999999999997</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.8</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">15.851941887820608</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.80000000000000038</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.81</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">16.047414159025777</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.8100000000000005</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.82</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">16.242787497489623</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.81999999999999951</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.83</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">16.438060732823274</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.82999999999999929</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.84</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">16.633232696488463</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.84000000000000019</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.85</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">16.828302221818475</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.8499999999999992</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.86</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">17.023268144039157</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.86</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.87</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">17.218129300289561</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.87000000000000044</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.88</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">17.412884529642916</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.88000000000000012</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.89</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">17.607532673127224</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.8899999999999999</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.9</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">17.802072573745924</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.90000000000000013</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.91</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">17.996503076498541</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.90999999999999959</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.92</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">18.190823028401176</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.91999999999999993</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.93</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">18.385031278506986</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.93000000000000049</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.94</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">18.57912667792661</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.9400000000000005</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.95</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">18.773108079848484</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.95000000000000018</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.96</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">18.966974339559158</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.95999999999999985</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.97</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">19.160724314463522</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.96999999999999964</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.98</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">19.354356864104879</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.9800000000000002</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">0.99</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">19.54787085018512</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.98999999999999977</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="5"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.VALUE(f, RC[-1], k, t)"><Data
+      ss:Type="Number">19.741265136584744</Data></Cell>
+    <Cell ss:ArrayRange="RC" ss:Formula="=BLACK.IMPLIED(f, RC[-1], k, t)"><Data
+      ss:Type="Number">0.99999999999999989</Data></Cell>
+    <Cell ss:Formula="=RC[-3]-RC[-1]"><Data ss:Type="Number">0</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
