@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="xllfms.cpp" />
     <ClCompile Include="xll_black.cpp" />
     <ClCompile Include="xll_bsm.cpp" />
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include <cmath>
 #include "fms_prob.h"
 #include "fms_root1d_newton.h"
+#include "../xll12/xll/ensure.h"
 
 namespace fms::black {
 
@@ -18,6 +19,7 @@ namespace fms::black {
     // Note F <= k iff Z <= s/2 + log(k/f)/s = m, then moneyness.
     // P'(F <= k) = P'(Z <= m) = P(Z + s <= m) = P(Z <= m - s).
 
+    // F <= k iff Z <= z
     template<class F = double, class S = double, class K = double>
     inline auto moneyness(F f, S s, K k)
     {
@@ -28,6 +30,21 @@ namespace fms::black {
     template<class F = double, class S = double, class K = double>
     inline auto value(F f, S s, K k)
     {
+        ensure(f >= 0);
+        ensure(s >= 0);
+        ensure(k >= 0);
+
+        // If f = 0 then F = 0 so E max{k - F, 0} = k.
+        // Note 1 + f == 1 is equivalent to fabs(f) < machine epsilon.
+        if (1 + f == 1) {
+            return k;
+        }
+
+        //??? If 1 + k == 1 what should be returned???
+
+        //??? If 1 + s == 1 what should be returned???
+
+        //??? Add conditions, if needed, to ensure moneyness doesn't fail.???
         auto z = moneyness(f, s, k);
 
         return k * prob::normal_cdf(z) - f * prob::normal_cdf(z - s);
@@ -36,6 +53,8 @@ namespace fms::black {
     template<class F = double, class S = double, class K = double, class T = double>
     inline auto value(F f, S sigma, K k, T t)
     {
+        ensure(t >= 0);
+
         return value(f, sigma*sqrt(t), k);
     }
 
@@ -44,6 +63,7 @@ namespace fms::black {
     template<class F = double, class S = double, class K = double>
     inline auto delta(F f, S s, K k)
     {
+        //??? Handle the edge cases for delta???
         auto z = moneyness(f, s, k);
 
         return  -prob::normal_cdf(z - s);
@@ -58,6 +78,7 @@ namespace fms::black {
     template<class F, class S, class K, class T>
     inline auto vega(F f, S sigma, K k, T t)
     {
+        //??? Handle the edge cases for vega???
         auto sqt = sqrt(t);
         auto s = sigma * sqt;
         auto z = moneyness(f, s, k);
@@ -69,12 +90,12 @@ namespace fms::black {
     template<class F, class V, class K, class T>
     inline auto implied(F f, V v, K k, T t)
     {
-        V s0 = 0; //??? find an initial volatility guess
-        std::function<V(V)> p; //??? supply the approriate function...
-        std::function<V(V)> dp; //??? ...and its derivative
+        V s0 = V(.2);
+        std::function<V(V)> p = [f,v,k,t](V s) { return -v + value(f, s, k, t); }; 
+        std::function<V(V)> dp = [f,k,t](V s) { return vega(f, s, k, t); };
         root1d::newton_solver<V, V> solver(s0, p, dp);
 
-        return 0; //??? return the implied volatility
+        return solver.solve(); 
     }
 
 } // fms::black

@@ -95,10 +95,38 @@ void test_fms_black_vega()
     int n = 5; // 3
     assert(fabs(dv - dv0) < n*eps);
 }
+
+// multiple of machine epsilon
+template<class X>
+struct implied {
+    static const int n;
+};
+template<>
+struct implied<double> {
+    static const int n = 3; 
+};
+template<>
+struct implied<float> {
+    static const int n = 4; 
+};
+
 template<class X>
 void test_fms_black_implied()
 {
-    //??? Add test for Black implied volatility.
+    std::vector<X> sigma;
+    // vol from 1% to 100% in 10% increments
+    for (X x = X(0.1); x <= X(1); x += X(0.1)) {
+        sigma.push_back(x);
+    }
+    X f = X(100), k = X(100), t = X(0.25);
+    X eps = std::numeric_limits<X>::epsilon();
+    
+    for (auto sigmai : sigma) {
+        X v = black::value(f, sigmai, k, t);
+        X s = black::implied(f, v, k, t);
+        X eps_ = s - sigmai;
+        assert(fabs(eps_) <= implied<X>::n*eps);
+    }
 }
 
 

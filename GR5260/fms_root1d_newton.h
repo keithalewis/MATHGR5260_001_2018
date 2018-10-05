@@ -20,22 +20,42 @@ namespace fms::root1d {
         newton_solver& operator=(const newton_solver&) = delete;
         virtual ~newton_solver()
         { }
-        X _next()
+        X _next() override
         {
             ++n;
             y = f(x);
+            if (y == 0) {
+                return x;
+            }
+
             x = x - y/df(x);
 
             return x;
         }
-        bool _done() const 
+        bool _done() override
         {
             if (n > max_iterations) {
                 throw std::runtime_error("fms::root1d::newton_solver: exeeded maximum number of iterations");;
             }
 
-            Y y_ = f(nextafter(x, X(1)));
-            Y _y = f(nextafter(x, X(-1)));
+            if (y == 0) {
+                return true;
+            }
+
+            X x_ = nextafter(x, X(1));
+            Y y_ = f(x_);
+            if (y_ == 0) {
+                x = x_;
+
+                return true;
+            }
+            X _x = nextafter(x, X(-1));
+            Y _y = f(_x);
+            if (_y == 0) {
+                x = _x;
+
+                return true;
+            }
 
             return fabs(y_) >= fabs(y) && fabs(_y) >= fabs(y);
         }

@@ -21,5 +21,8 @@
     <ClCompile Include="xll_bsm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xllfms.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

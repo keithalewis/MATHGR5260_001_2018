@@ -14,7 +14,7 @@ namespace fms::root1d {
             return _next();
         }
         // no more iterations needed
-        bool done() const
+        bool done()
         {
             return _done();
         }
@@ -30,7 +30,7 @@ namespace fms::root1d {
         }
     private:
         virtual X _next() = 0;
-        virtual bool _done() const = 0;
+        virtual bool _done() = 0;
     };
 
 } // fms::root1d
