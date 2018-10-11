@@ -9,7 +9,7 @@ namespace fms::prob {
     template<class X = double>
     inline X normal_pdf(X x) noexcept
     {
-        static X sqrt2pi = sqrt(X(2)*X(M_PI));
+        static X sqrt2pi = sqrt(X(2*M_PI));
 
         return exp(-x*x/2)/sqrt2pi;
     }

@@ -12,7 +12,7 @@ AddIn xai_bsm_value(
     .Arg(XLL_DOUBLE, L"k", L"is the strike.")
     .Arg(XLL_DOUBLE, L"t", L"is the time in years to expiration.")
     .Category(L"GR5260")
-    .FunctionHelp(L"Return the Black put option forward value.")
+    .FunctionHelp(L"Return the Black-Scholes/Merton put option value.")
     .Documentation(L"TBA")
 );
 double WINAPI xll_bsm_value(double r, double s, double sigma, double k, double t)
@@ -38,7 +38,7 @@ AddIn xai_bsm_delta(
     .Arg(XLL_DOUBLE, L"k", L"is the strike.")
     .Arg(XLL_DOUBLE, L"t", L"is the time in years to expiration.")
     .Category(L"GR5260")
-    .FunctionHelp(L"Return the Black put option forward delta.")
+    .FunctionHelp(L"Return the Black-Scholes/Merton put option delta.")
     .Documentation(L"TBA")
 );
 double WINAPI xll_bsm_delta(double r, double s, double sigma, double k, double t)
