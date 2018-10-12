@@ -12,8 +12,15 @@ AddIn xai_fms_poly_Bell(
     .Documentation(
 LR"xyzzyx(
 Bell polynomials satisfy the recurrence relations <math>B<subscript>0</subscript> = 1</math> and
-<math>B<subscript>n+1</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n+1</subscript>)
-= ...</math>
+<quote>
+<math>
+B<subscript>n+1</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n+1</subscript>)
+= &#8721;<subscript>k=0</subscript><superscript>n</superscript> C(n,k)
+B<subscript>n - k</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n - k</subscript>)
+&#954;<subscript>k + 1</subscript>
+</math>
+</quote>
+where <math>C(n,k)</math> is the number of combinations of <math>k</math> items chosen from <math>n</math>.
 )xyzzyx"
     )
 );
@@ -34,7 +41,7 @@ double WINAPI xll_fms_poly_Bell(const _FP12* pkappa)
 
 AddIn xai_fms_poly_Hermite(
     Function(XLL_DOUBLE, L"?xll_fms_poly_Hermite", L"POLY.HERMITE")
-    .Arg(XLL_WORD, L"n", L"is an array of cumulants.")
+    .Arg(XLL_WORD, L"n", L"is the number of the polynomial.")
     .Arg(XLL_DOUBLE, L"x", L"is the value at which to compute the polynomial.")
     .FunctionHelp(L"Compute Hermite polynomials.")
     .Category(L"GR5260")
@@ -42,8 +49,10 @@ AddIn xai_fms_poly_Hermite(
         LR"xyzzyx(
 Hermite polynomials satisfy the recurrence relations H<subscript>0</subscript>(x) = 1, 
 H<subscript>1</subscript>(x) = x, and 
+<quote>
 H<subscript>n + 1</subscript>(x) 
   = x H<subscript>n</subscript>(x) - n H<subscript>n - 1</subscript>(x).
+</quote>
 )xyzzyx"
 )
 ); 
@@ -62,4 +71,4 @@ double WINAPI xll_fms_poly_Hermite(WORD n, double x)
     return result;
 }
 
-//??? Implement an add-in called NJR.CDF that calls fms::prob::njr_cdf
+//??? Implement an add-in NJR.CDF(kappa, x) that calls fms::prob::njr_cdf

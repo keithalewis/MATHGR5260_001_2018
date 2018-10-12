@@ -7,7 +7,7 @@ namespace fms::poly {
     template<class X = double, class K = double>
     inline auto Bell(size_t n, const K* kappa)
     {
-        return n + *kappa; //??? return B_n(kappa_0,...,kappa_{n-1}); Note off by 1.
+        return n + *kappa; //??? return B_n(kappa_0,...,kappa_{n-1});
     }
 
     // The n-th Hermite polynomial He_n(x)

@@ -7,9 +7,9 @@
  xmlns:html="http://www.w3.org/TR/REC-html40">
  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
   <Author>Keith Lewis</Author>
-  <LastAuthor>Keith Lewis</LastAuthor>
+  <LastAuthor>Windows User</LastAuthor>
   <Created>2018-10-12T04:15:26Z</Created>
-  <LastSaved>2018-10-12T15:46:13Z</LastSaved>
+  <LastSaved>2018-10-12T21:21:17Z</LastSaved>
   <Version>16.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
@@ -24,11 +24,17 @@
     <FunctionGroup>14</FunctionGroup>
     <Formula>=#REF!</Formula>
    </ExternName>
+   <ExternName>
+    <Name>POLY.HERMITE</Name>
+    <Macro>Function</Macro>
+    <FunctionGroup>14</FunctionGroup>
+    <Formula>=#REF!</Formula>
+   </ExternName>
   </SupBook>
-  <WindowHeight>10020</WindowHeight>
-  <WindowWidth>20520</WindowWidth>
-  <WindowTopX>32767</WindowTopX>
-  <WindowTopY>32767</WindowTopY>
+  <WindowHeight>12915</WindowHeight>
+  <WindowWidth>28800</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>0</WindowTopY>
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
@@ -67,115 +73,178 @@
     <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
      ss:Color="#7F7F7F"/>
    </Borders>
-   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#3F3F76"/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#333399"/>
    <Interior ss:Color="#FFCC99" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s63">
-   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
-   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
+  <Style ss:ID="s30" ss:Name="Output">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#333333"
     ss:Bold="1"/>
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s66">
+  <Style ss:ID="s62">
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s63">
    <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
    <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
     ss:Bold="1"/>
    <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
   </Style>
-  <Style ss:ID="s67">
+  <Style ss:ID="s68">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
+    ss:Bold="1"/>
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s69">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
+    ss:Bold="1"/>
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s70">
+   <Borders>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s72" ss:Parent="s30">
+   <Borders/>
+  </Style>
+  <Style ss:ID="s74">
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s76">
+   <Alignment ss:Horizontal="Right" ss:Vertical="Bottom"/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"
+    ss:Bold="1"/>
+   <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="s86">
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#A6A6A6"/>
    <Interior ss:Color="#F2F2F2" ss:Pattern="Solid"/>
   </Style>
  </Styles>
+ <Names>
+  <NamedRange ss:Name="n" ss:RefersTo="=NJR!R3C3"/>
+  <NamedRange ss:Name="x" ss:RefersTo="=NJR!R2C3"/>
+ </Names>
  <Worksheet ss:Name="Bell">
   <Table ss:ExpandedColumnCount="5" ss:ExpandedRowCount="20" x:FullColumns="1"
-   x:FullRows="1" ss:StyleID="s67" ss:DefaultColumnWidth="51"
+   x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="51"
    ss:DefaultRowHeight="14.25">
-   <Column ss:StyleID="s67" ss:AutoFitWidth="0" ss:Width="20.25"/>
-   <Column ss:StyleID="s67" ss:Width="65.25"/>
-   <Column ss:Index="4" ss:StyleID="s67" ss:Width="51.375"/>
+   <Column ss:StyleID="s62" ss:AutoFitWidth="0" ss:Width="20.25"/>
+   <Column ss:StyleID="s62" ss:Width="65.25"/>
+   <Column ss:Index="4" ss:StyleID="s62" ss:Width="51.75"/>
    <Row ss:AutoFitHeight="0"/>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2" ss:StyleID="s66"><Data ss:Type="String">kappa</Data></Cell>
-    <Cell ss:StyleID="s66"><Data ss:Type="String">Bell</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s63"><Data ss:Type="String">kappa</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">Bell</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:StyleID="s29"><Data ss:Type="Number">0.5</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(RC[-1]:R3C2)"><Data
+      ss:Type="Number">1.5</Data></Cell>
     <Cell ss:StyleID="s33" ss:Formula="=RC[-2]"><Data ss:Type="Number">0.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">0.25</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">2.5</Data></Cell>
     <Cell ss:StyleID="s33" ss:Formula="=R[-1]C[-2]^2+RC[-2]"><Data ss:Type="Number">0.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">0.125</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">3.5</Data></Cell>
     <Cell ss:StyleID="s33"><Data ss:Type="String">???</Data></Cell>
     <Cell><Data ss:Type="String">&lt;&#45;- formula for 3rd Bell polynomial</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">6.25E-2</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">4.5</Data></Cell>
     <Cell ss:StyleID="s33"><Data ss:Type="String">???</Data></Cell>
     <Cell><Data ss:Type="String">&lt;&#45;- formula for 4th Bell polynomial</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">3.125E-2</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">5.5</Data></Cell>
     <Cell ss:StyleID="s33"><Data ss:Type="String">???</Data></Cell>
     <Cell><Data ss:Type="String">&lt;&#45;- formula for 5th Bell polynomial</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">1.5625E-2</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">6.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">7.8125E-3</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">7.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">3.90625E-3</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">8.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">1.953125E-3</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">9.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">9.765625E-4</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">10.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">4.8828125E-4</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">11.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">2.44140625E-4</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">12.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">1.220703125E-4</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">13.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">6.103515625E-5</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">14.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">3.0517578125E-5</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">15.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">1.52587890625E-5</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">16.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">7.62939453125E-6</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">17.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:Index="2" ss:Formula="=R[-1]C*R3C2"><Data ss:Type="Number">3.814697265625E-6</Data></Cell>
-    <Cell ss:ArrayRange="RC" ss:Formula="=POLY.BELL(R3C2)"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=POLY.BELL(R3C[-1]:RC2)"><Data
+      ss:Type="Number">18.5</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -191,152 +260,556 @@
     <VerticalResolution>-3</VerticalResolution>
    </Print>
    <Selected/>
-   <Panes>
-    <Pane>
-     <Number>3</Number>
-     <ActiveRow>16</ActiveRow>
-     <ActiveCol>7</ActiveCol>
-    </Pane>
-   </Panes>
    <ProtectObjects>False</ProtectObjects>
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>
  </Worksheet>
  <Worksheet ss:Name="Hermite">
   <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="43" x:FullColumns="1"
-   x:FullRows="1" ss:DefaultColumnWidth="51" ss:DefaultRowHeight="14.25">
-   <Column ss:AutoFitWidth="0" ss:Width="20.25"/>
+   x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="51"
+   ss:DefaultRowHeight="14.25">
+   <Column ss:StyleID="s62" ss:AutoFitWidth="0" ss:Width="20.25"/>
    <Row ss:AutoFitHeight="0"/>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2" ss:StyleID="s63"><Data ss:Type="String">x\n</Data></Cell>
-    <Cell><Data ss:Type="String">H_0</Data></Cell>
-    <Cell><Data ss:Type="String">H_1</Data></Cell>
-    <Cell><Data ss:Type="String">H_2</Data></Cell>
-    <Cell><Data ss:Type="String">H_3</Data></Cell>
-    <Cell><Data ss:Type="String">H_4</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s68"><Data ss:Type="String">x/n</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s69"><Data ss:Type="Number">4</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-2</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.9</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.89999999999999991</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.10000000000000009</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.8</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.19999999999999996</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2000000000000002</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.7</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.30000000000000004</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2999999999999998</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.6</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.60000000000000009</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.39999999999999991</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.4</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.5</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.4</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.39999999999999991</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.60000000000000009</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.6</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.3</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.30000000000000004</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.7</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.19999999999999996</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.8</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1.1000000000000001</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.10000000000000009</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.89999999999999991</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.9</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-1</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.9</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">9.9999999999999978E-2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.1</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.8</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.19999999999999996</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2000000000000002</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.2</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.7</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.30000000000000004</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2999999999999998</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.3</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.6</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.4</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.5</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.4</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.6</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.3</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.7</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.2</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.8</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">-0.1</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">-0.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">-0.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.9</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.0999999999999996</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2000000000000002</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.2</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2999999999999998</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.3</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.4</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.4000000000000004</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.5999999999999996</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.7</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.7</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.8</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.8</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">0.9</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">0.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">0.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.9000000000000004</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.1000000000000001</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.1</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.0999999999999996</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.0999999999999996</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2000000000000002</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.2</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.3</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.2999999999999998</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.3</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.4</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.4000000000000004</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.4</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.5</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.6</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.6</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.5999999999999996</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.6</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.7</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.7</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.7</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.8</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.8</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.8</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">1.9</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">1.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3.9</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4.9000000000000004</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5.9</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0">
-    <Cell ss:Index="2"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:Index="2" ss:StyleID="s70"><Data ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">2</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">3</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">4</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">5</Data></Cell>
+    <Cell ss:StyleID="s72" ss:Formula="=POLY.HERMITE(R2C,RC2)"><Data
+      ss:Type="Number">6</Data></Cell>
    </Row>
   </Table>
   <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
@@ -346,13 +819,112 @@
     <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
    </PageSetup>
    <Unsynced/>
-   <Panes>
-    <Pane>
-     <Number>3</Number>
-     <ActiveRow>1</ActiveRow>
-     <ActiveCol>6</ActiveCol>
-    </Pane>
-   </Panes>
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="NJR">
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="20" x:FullColumns="1"
+   x:FullRows="1" ss:StyleID="s74" ss:DefaultRowHeight="15">
+   <Column ss:StyleID="s74" ss:AutoFitWidth="0" ss:Width="19.5"/>
+   <Row ss:Index="2">
+    <Cell ss:Index="2" ss:StyleID="s76"><Data ss:Type="String">x</Data></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="Number">0</Data><NamedCell ss:Name="x"/></Cell>
+    <Cell ss:Index="5"><Data ss:Type="String">NJR.CDF</Data></Cell>
+    <Cell ss:StyleID="s30" ss:Formula="=njr.cdf(INDIRECT(&quot;B&quot;&amp;R[1]C[-3]+4&amp;&quot;:B5&quot;),x)"><Data
+      ss:Type="Error">#NAME?</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s76"><Data ss:Type="String">n</Data></Cell>
+    <Cell ss:StyleID="s29"><Data ss:Type="Number">5</Data><NamedCell ss:Name="n"/></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s76"><Data ss:Type="String">kappa</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:StyleID="s29"><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86" ss:ArrayRange="RC:R[15]C"
+     ss:Formula="=INDIRECT(&quot;B&quot;&amp;R[-2]C[-1]+4&amp;&quot;:B5&quot;)"><Data
+      ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s86"><Data ss:Type="String">&lt;&#45;- First n elements of kappa</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000002E-2</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Number">1.0000000000000002E-2</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000002E-3</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Number">1.0000000000000002E-3</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000003E-4</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Number">1.0000000000000003E-4</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000004E-5</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Number">1.0000000000000004E-5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000004E-6</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000005E-7</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000005E-8</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000005E-9</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000006E-10</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000006E-11</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000006E-12</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000007E-13</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000008E-14</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.0000000000000009E-15</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2" ss:Formula="=R[-1]C*R5C2"><Data ss:Type="Number">1.000000000000001E-16</Data></Cell>
+    <Cell ss:Index="4" ss:StyleID="s86"><Data ss:Type="Error">#N/A</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Print>
+    <ValidPrinterInfo/>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>600</VerticalResolution>
+   </Print>
    <ProtectObjects>False</ProtectObjects>
    <ProtectScenarios>False</ProtectScenarios>
   </WorksheetOptions>

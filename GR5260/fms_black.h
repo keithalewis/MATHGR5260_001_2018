@@ -70,12 +70,10 @@ namespace fms::black {
         ensure(s >= 0);
         ensure(k >= 0);
 
-
         if (1 + k == 1) {
             return K(0);
         }
-        // If f = 0 then F = 0 so E max{k - F, 0} = k.
-        // Note 1 + f == 1 is equivalent to fabs(f) < machine epsilon.
+
         if (1 + f == 1) {
             return F(-1);
         }
@@ -103,13 +101,9 @@ namespace fms::black {
         ensure(k >= 0);
         ensure(t >= 0);
 
-        // If f = 0 then F = 0 so E max{k - F, 0} = k.
-        // Note 1 + f == 1 is equivalent to fabs(f) < machine epsilon.
         if (1 + f == 1) {
             return F(0);
         }
-
-        // Test also for f == k???
 
         if (1 + k == 1) {
             return K(0);
