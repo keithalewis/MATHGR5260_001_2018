@@ -40,11 +40,14 @@ namespace fms::black {
             return k;
         }
 
-        //??? If 1 + k == 1 what should be returned???
+        if (1 + k == 1) {
+            return K(0);
+        }
 
-        //??? If 1 + s == 1 what should be returned???
+        if (1 + s == 0) {
+            return std::max(k - f, F(0));
+        }
 
-        //??? Add conditions, if needed, to ensure moneyness doesn't fail.???
         auto z = moneyness(f, s, k);
 
         return k * prob::normal_cdf(z) - f * prob::normal_cdf(z - s);
@@ -63,7 +66,24 @@ namespace fms::black {
     template<class F = double, class S = double, class K = double>
     inline auto delta(F f, S s, K k)
     {
-        //??? Handle the edge cases for delta???
+        ensure(f >= 0);
+        ensure(s >= 0);
+        ensure(k >= 0);
+
+
+        if (1 + k == 1) {
+            return K(0);
+        }
+        // If f = 0 then F = 0 so E max{k - F, 0} = k.
+        // Note 1 + f == 1 is equivalent to fabs(f) < machine epsilon.
+        if (1 + f == 1) {
+            return F(-1);
+        }
+
+        if (1 + s == 0) {
+            return k == f ? S(0.5) : S(-1 * (k <= f));
+        }
+
         auto z = moneyness(f, s, k);
 
         return  -prob::normal_cdf(z - s);
@@ -78,7 +98,27 @@ namespace fms::black {
     template<class F, class S, class K, class T>
     inline auto vega(F f, S sigma, K k, T t)
     {
-        //??? Handle the edge cases for vega???
+        ensure(f >= 0);
+        ensure(sigma >= 0);
+        ensure(k >= 0);
+        ensure(t >= 0);
+
+        // If f = 0 then F = 0 so E max{k - F, 0} = k.
+        // Note 1 + f == 1 is equivalent to fabs(f) < machine epsilon.
+        if (1 + f == 1) {
+            return F(0);
+        }
+
+        // Test also for f == k???
+
+        if (1 + k == 1) {
+            return K(0);
+        }
+
+        if (1 + t == 0) {
+            return T(0);
+        }
+
         auto sqt = sqrt(t);
         auto s = sigma * sqt;
         auto z = moneyness(f, s, k);

@@ -166,6 +166,7 @@
     <ClCompile Include="xllfms.cpp" />
     <ClCompile Include="xll_black.cpp" />
     <ClCompile Include="xll_bsm.cpp" />
+    <ClCompile Include="xll_poly.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\xll12\xll12.vcxproj">

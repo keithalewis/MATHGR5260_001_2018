@@ -3,8 +3,40 @@
 #include <algorithm>
 #include "fms_root1d_newton.h"
 #include "fms_black.h"
+#include "fms_poly.h"
 
 using namespace fms;
+
+template<class X>
+void test_fms_poly_Hermite()
+{
+    using fms::poly::Hermite;
+    std::vector<X> x;
+
+    for (auto x_ = X(-2); x_ <= X(2); x_ += X(0.1)) {
+        x.push_back(x_);
+    }
+    
+    for (auto x_ : x) {
+        assert(1 == Hermite(0, x_));
+        assert(x_ == Hermite(1, x_));
+        assert(x_*x_ - 1 == Hermite(2, x_));
+        assert(x_*x_*x_ - 3 * x_ == Hermite(3, x_));
+        //??? put in tests for n = 4 and n = 5
+    }
+}
+
+template<class X>
+void test_fms_poly_Bell()
+{
+    using fms::poly::Bell;
+    X kappa[] = { X(1), X(2), X(3), X(4) };
+
+    assert(1 == Bell(0, kappa));
+    assert(kappa[1] == Bell(1, kappa));
+    assert(kappa[1]*kappa[1] + kappa[2] == Bell(2, kappa));
+    //??? put in tests for n == 3 and n == 4
+}
 
 template<class X>
 void test_fms_root1d_newton()
@@ -141,6 +173,12 @@ void test_fms_black()
 
 int main()
 {
+    test_fms_poly_Hermite<double>();
+    test_fms_poly_Hermite<float>();
+
+    test_fms_poly_Bell<double>();
+    test_fms_poly_Bell<float>();
+
     test_fms_root1d_newton<double>();
     test_fms_root1d_newton<float>();
 

@@ -30,6 +30,12 @@
     <ClInclude Include="fms_prob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fms_poly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_njr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GR5260.cpp">
