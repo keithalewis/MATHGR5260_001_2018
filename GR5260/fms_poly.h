@@ -1,5 +1,6 @@
 // fms_poly.h - Various polynomials
 #pragma once
+#include <vector>
 
 namespace fms::poly {
 
