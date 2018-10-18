@@ -62,17 +62,16 @@ void test_fms_poly_Bell()
     assert (B4 == Bell(4,kappa));
 
     for (size_t i = 0; i < 5; ++i) {
-        assert (Bell(i,kappa) == fms::poly::Bell2(i,kappa));
+        auto Bi = Bell(i,kappa);
+        assert (Bi == fms::poly::Bell2(i,kappa));
+        assert (Bi == fms::poly::Bell3(i,kappa));
     }
-    std::vector<X> B_(4);
-    fms::poly::Bell3(4,kappa,0,B_.data());
-
     double secs;
     secs = timer([&kappa]() { Bell(4,kappa); }, 10000);
     secs = secs;
     secs = timer([&kappa]() { fms::poly::Bell2(4,kappa); }, 10000);
     secs = secs;
-    secs = timer([&kappa,&B_]() { fms::poly::Bell3(4,kappa,0,B_.data()); }, 10000);
+    secs = timer([&kappa]() { fms::poly::Bell3(4,kappa); }, 10000);
     secs = secs;
 }
 
@@ -86,6 +85,10 @@ void test_fms_prob_njr()
         fms::prob::njr_cdf(4,kappa.data(),x + i/10000.);
     }
     x = x;
+
+    // Independent check.
+    // X = Normal(0, 1) + Poisson(lambda)
+    // P(X <= x) = sum_{k>=0} P(X + k <= x) exp(-lambda)lambda^k/k!
 }
 
 template<class X>

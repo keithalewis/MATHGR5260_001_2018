@@ -55,14 +55,11 @@ namespace fms::poly {
     template<class K = double>
     inline auto Bell3(size_t n, const K* kappa)
     {
-        static size_t on = 0;
         static const K* okappa = nullptr;
         static std::vector<K> B_;
 
-        if (n != on || kappa != okappa) {
-            on = n;
+        if (kappa != okappa) {
             okappa = kappa;
-            B_.capacity(n+1);
             B_.resize(0);
         }
 
@@ -78,18 +75,20 @@ namespace fms::poly {
  
         K n_ = K(n - 1);
         K C = 1; // C(n-1,0);
-        B = 0;
+        K B = 0;
 
-        for (size_t k = 0; k < m; ++k) {
+        for (size_t k = 0; k < B_.size(); ++k) {
             B += C * B_[k] * kappa[n-1-k];
             C *= n_;
             C /= k + 1; // C(n - 1, k)
             n_ = n_ - 1;
         }
-
         B_.push_back(B);
+        for (size_t k = B_.size(); k < n; ++k) {
+            B_.push_back(Bell(k, kappa));
+        }
 
-        return Bell3(n, kappa, m + 1, B_);
+        return B_[n];
     }
 
 
