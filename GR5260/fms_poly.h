@@ -3,18 +3,111 @@
 
 namespace fms::poly {
 
-    // The n-th Bell polynomial B_n(kappa[0],...,kappa[n-1])
-    template<class X = double, class K = double>
+    // The Bell polynomial B_n(kappa_1,...,kappa_n) satisfy B_0 = 1 and
+    //   B_{n+1}(kappa_1, ..., kappa_{n+1}) = sum_{k=0}^n C(n,k) B_{n-k}(kappa_1,...,kappa_{n-k}) kappa_{k+1}.
+    // Replacing n by n-1 and renaming kappa_j to kappa_{j-1} yields
+    //   B_n(kappa_0, ..., kappa_{n-1}) = sum_{k=0}^{n-1} C(n-1,k) B_{n-1-k}(kappa_0,...,kappa_{n-1-k}) kappa_k.
+    template<class K = double>
     inline auto Bell(size_t n, const K* kappa)
     {
-        return n + *kappa; //??? return B_n(kappa_0,...,kappa_{n-1});
+        if (n == 0) {
+            return K(1);
+        }
+
+        K n_ = K(n - 1);
+        K C = 1; // C(n-1,0);
+        K B = 0;
+
+        for (size_t k = 0; k < n; ++k) {
+            B += C * Bell(n - 1 - k, kappa) * kappa[k];
+            C *= n_;
+            C /= k + 1; // C(n - 1, k)
+            n_ = n_ - 1;
+        }
+
+        return B;
+    }
+    // B_n(kappa_0, ..., kappa_{n-1}) 
+    //   = sum_{k=0}^{n-1} C(n-1,k) B_{n-1-k} kappa_k.
+    //   = sum_{k=0}^{n-1} C(n-1,n-1-k) B_{n-1-k} kappa_k.
+    //   = sum_{k=0}^{n-1} C(n-1,k)B_k kappa_{n-1-k} 
+    template<class K = double>
+    inline auto Bell2(size_t n, const K* kappa)
+    {
+        if (n == 0) {
+            return K(1);
+        }
+
+        K n_ = K(n - 1);
+        K C = 1; // C(n-1,0);
+        K B = 0;
+
+        for (size_t k = 0; k < n; ++k) {
+            B += C * Bell2(k, kappa) * kappa[n-1-k];
+            C *= n_;
+            C /= k + 1; // C(n - 1, k)
+            n_ = n_ - 1;
+        }
+
+        return B;
+    }
+    // Bell with B_1, ..., B_m already computed. B_ should have room for n+1 values.
+    template<class K = double>
+    inline auto Bell3(size_t n, const K* kappa)
+    {
+        static size_t on = 0;
+        static const K* okappa = nullptr;
+        static std::vector<K> B_;
+
+        if (n != on || kappa != okappa) {
+            on = n;
+            okappa = kappa;
+            B_.capacity(n+1);
+            B_.resize(0);
+        }
+
+        if (n < B_.size()) {
+            return B_[n]; // already computed
+        }
+
+        if (n == 0) {
+            B_.push_back(K(1));
+
+            return K(1);
+        }
+ 
+        K n_ = K(n - 1);
+        K C = 1; // C(n-1,0);
+        B = 0;
+
+        for (size_t k = 0; k < m; ++k) {
+            B += C * B_[k] * kappa[n-1-k];
+            C *= n_;
+            C /= k + 1; // C(n - 1, k)
+            n_ = n_ - 1;
+        }
+
+        B_.push_back(B);
+
+        return Bell3(n, kappa, m + 1, B_);
     }
 
-    // The n-th Hermite polynomial He_n(x)
+
+    // The Hermite polynomials satisfy He_0(x) = 1, He_1(x) = x, and 
+    //   He_{n+1}(x) = x He_n(x) - n He_{n-1}(x). Replacing n by n - 1
+    //   He_n(x) = x He_{n-1}(x) - (n-1} He_{n-2}(x).
     template<class X = double>
-    inline auto Hermite(size_t n, X x)
+    inline X Hermite(size_t n, X x)
     {
-        return n + x; //??? Return n-th Hermite polynomial at x.
+        if (n == 0) {
+            return 1;
+        }
+
+        if (n == 1) {
+            return x;
+        }
+
+        return x * Hermite(n - 1, x) - (n - 1)*Hermite(n - 2, x);
     }
 
 }

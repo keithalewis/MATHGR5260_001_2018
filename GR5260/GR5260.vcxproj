@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="fms_analytic.h" />
     <ClInclude Include="fms_njr.h" />
     <ClInclude Include="fms_poly.h" />
     <ClInclude Include="fms_black.h" />

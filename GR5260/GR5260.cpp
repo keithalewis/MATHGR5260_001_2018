@@ -1,11 +1,27 @@
 // GR5260.cpp - test program
 #include <cassert>
 #include <algorithm>
+#include <chrono>
+#include <functional>
+#include "fms_analytic.h"
 #include "fms_root1d_newton.h"
 #include "fms_black.h"
 #include "fms_poly.h"
+#include "fms_njr.h"
 
 using namespace fms;
+
+inline auto timer(const std::function<void(void)>& f, size_t count = 1)
+{
+    auto start = std::chrono::system_clock::now();
+    while (count--) {
+        f();
+    }
+    auto stop = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed = stop-start;
+
+    return elapsed.count(); // duration in seconds
+}
 
 template<class X>
 void test_fms_poly_Hermite()
@@ -21,7 +37,7 @@ void test_fms_poly_Hermite()
         assert(1 == Hermite(0, x_));
         assert(x_ == Hermite(1, x_));
         assert(x_*x_ - 1 == Hermite(2, x_));
-        assert(x_*x_*x_ - 3 * x_ == Hermite(3, x_));
+        assert(x_*(x_*x_ - 1) - 2 * x_ == Hermite(3, x_));
         //??? put in tests for n = 4 and n = 5
     }
 }
@@ -33,9 +49,43 @@ void test_fms_poly_Bell()
     X kappa[] = { X(1), X(2), X(3), X(4) };
 
     assert(1 == Bell(0, kappa));
-    assert(kappa[1] == Bell(1, kappa));
-    assert(kappa[1]*kappa[1] + kappa[2] == Bell(2, kappa));
-    //??? put in tests for n == 3 and n == 4
+    X B1 = kappa[0];
+    assert(B1 == Bell(1, kappa));
+    X B2 = B1 * kappa[0] + kappa[1];
+    assert(B2 == Bell(2, kappa));
+    X eps;
+    X B3 = B2*kappa[0] + 2*B1*kappa[1] + kappa[2]; 
+    eps = B3 - Bell(3,kappa);
+    assert (B3 == Bell(3,kappa));
+    X B4 = B3*kappa[0] + 3*B2*kappa[1] + 3*B1*kappa[2] + kappa[3];
+    eps = B4 - Bell(4,kappa);
+    assert (B4 == Bell(4,kappa));
+
+    for (size_t i = 0; i < 5; ++i) {
+        assert (Bell(i,kappa) == fms::poly::Bell2(i,kappa));
+    }
+    std::vector<X> B_(4);
+    fms::poly::Bell3(4,kappa,0,B_.data());
+
+    double secs;
+    secs = timer([&kappa]() { Bell(4,kappa); }, 10000);
+    secs = secs;
+    secs = timer([&kappa]() { fms::poly::Bell2(4,kappa); }, 10000);
+    secs = secs;
+    secs = timer([&kappa,&B_]() { fms::poly::Bell3(4,kappa,0,B_.data()); }, 10000);
+    secs = secs;
+}
+
+template<class X>
+void test_fms_prob_njr()
+{
+    X x = 0;
+    std::vector<X> kappa(4);
+
+    for (int i = 0; i < 1000; ++i) {
+        fms::prob::njr_cdf(4,kappa.data(),x + i/10000.);
+    }
+    x = x;
 }
 
 template<class X>
@@ -171,13 +221,26 @@ void test_fms_black()
     test_fms_black_implied<X>();
 }
 
+template<class X>
+void test_fms_analytic()
+{
+    using fms::analytic;
+
+    analytic<X> x1(1);
+    assert (x1.size() == 1);
+}
+
 int main()
 {
+    test_fms_analytic<double>();
+
     test_fms_poly_Hermite<double>();
     test_fms_poly_Hermite<float>();
 
     test_fms_poly_Bell<double>();
     test_fms_poly_Bell<float>();
+
+    test_fms_prob_njr<double>();
 
     test_fms_root1d_newton<double>();
     test_fms_root1d_newton<float>();

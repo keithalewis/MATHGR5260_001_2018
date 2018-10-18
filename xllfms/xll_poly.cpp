@@ -1,5 +1,6 @@
 ﻿// xll_poly.cpp - Various polynomials
 #include "../GR5260/fms_poly.h"
+#include "../GR5260/fms_njr.h"
 #include "../xll12/xll/xll.h"
 
 using namespace xll;
@@ -13,14 +14,12 @@ AddIn xai_fms_poly_Bell(
 LR"xyzzyx(
 Bell polynomials satisfy the recurrence relations <math>B<subscript>0</subscript> = 1</math> and
 <quote>
-<math>
 B<subscript>n+1</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n+1</subscript>)
-= &#8721;<subscript>k=0</subscript><superscript>n</superscript> C(n,k)
-B<subscript>n - k</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n - k</subscript>)
-&#954;<subscript>k + 1</subscript>
-</math>
+= &#8721;<superscript>n</superscript><subscript>k=0</subscript> C(n,k)
+B<subscript>n-k</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n-k</subscript>)
+&#954;<subscript>k+1</subscript>
 </quote>
-where <math>C(n,k)</math> is the number of combinations of <math>k</math> items chosen from <math>n</math>.
+where C(n,k) is the number of combinations of <math>k</math> items chosen from <math>n</math>.
 )xyzzyx"
     )
 );
@@ -72,3 +71,62 @@ double WINAPI xll_fms_poly_Hermite(WORD n, double x)
 }
 
 //??? Implement an add-in NJR.CDF(kappa, x) that calls fms::prob::njr_cdf
+AddIn xai_fms_prob_njr_pdf(
+    Function(XLL_DOUBLE, L"?xll_fms_prob_njr_pdf", L"NJR.PDF")
+    .Arg(XLL_FP, L"kappa", L"is an array of cumulants.")
+    .Arg(XLL_DOUBLE, L"x", L"is the value at which to compute the density function.")
+    .FunctionHelp(L"Compute the normal Jarrow-Rudd density function.")
+    .Category(L"GR5260")
+    .Documentation(
+        LR"xyzzyx(
+psi(x) (1 + sum_3 B_n H_n(x))
+)xyzzyx"
+)
+); 
+double WINAPI xll_fms_prob_njr_pdf(const _FP12* pkappa, double x)
+{
+#pragma XLLEXPORT
+    double result = std::numeric_limits<double>::quiet_NaN();
+
+    try {
+        size_t n = size(*pkappa);
+
+        result = fms::prob::njr_pdf(n, pkappa->array, x);
+    }
+    catch (const std::exception& ex) {
+        XLL_ERROR(ex.what());
+    }
+
+    return result;
+}
+
+
+AddIn xai_fms_prob_njr_cdf(
+    Function(XLL_DOUBLE, L"?xll_fms_prob_njr_cdf", L"NJR.CDF")
+    .Arg(XLL_FP, L"kappa", L"is an array of cumulants.")
+    .Arg(XLL_DOUBLE, L"x", L"is the value at which to compute the cumulative distribution.")
+    .FunctionHelp(L"Compute the normal Jarrow-Rudd cumulative distribution function.")
+    .Category(L"GR5260")
+    .Documentation(
+        LR"xyzzyx(
+Psi(x) - psi(x) sum_3 B_n H_n-1(x)
+)xyzzyx"
+)
+); 
+double WINAPI xll_fms_prob_njr_cdf(const _FP12* pkappa, double x)
+{
+#pragma XLLEXPORT
+    double result = std::numeric_limits<double>::quiet_NaN();
+
+    try {
+        size_t n = size(*pkappa);
+
+        result = fms::prob::njr_cdf(n, pkappa->array, x);
+    }
+    catch (const std::exception& ex) {
+        XLL_ERROR(ex.what());
+    }
+
+    return result;
+}
+
