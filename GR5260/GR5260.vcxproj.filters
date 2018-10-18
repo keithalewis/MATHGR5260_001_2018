@@ -42,9 +42,6 @@
     <ClInclude Include="fms_bootstrap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fms_fixed_income.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="fms_pwflat.h">
       <Filter>Header Files</Filter>
     </ClInclude>

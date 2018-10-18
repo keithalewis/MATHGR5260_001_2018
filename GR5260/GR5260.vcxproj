@@ -149,7 +149,6 @@
   <ItemGroup>
     <ClInclude Include="fms_analytic.h" />
     <ClInclude Include="fms_bootstrap.h" />
-    <ClInclude Include="fms_fixed_income.h" />
     <ClInclude Include="fms_njr.h" />
     <ClInclude Include="fms_poly.h" />
     <ClInclude Include="fms_black.h" />

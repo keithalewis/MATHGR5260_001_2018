@@ -4,10 +4,11 @@
 #include <chrono>
 #include <functional>
 #include "fms_analytic.h"
-#include "fms_root1d_newton.h"
 #include "fms_black.h"
-#include "fms_poly.h"
 #include "fms_njr.h"
+#include "fms_poly.h"
+#include "fms_root1d_newton.h"
+#include "fms_bootstrap.h"
 
 using namespace fms;
 
