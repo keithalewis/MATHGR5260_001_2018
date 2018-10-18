@@ -39,6 +39,15 @@
     <ClInclude Include="fms_analytic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fms_bootstrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_fixed_income.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_pwflat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GR5260.cpp">

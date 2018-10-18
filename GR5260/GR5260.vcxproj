@@ -148,11 +148,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="fms_analytic.h" />
+    <ClInclude Include="fms_bootstrap.h" />
+    <ClInclude Include="fms_fixed_income.h" />
     <ClInclude Include="fms_njr.h" />
     <ClInclude Include="fms_poly.h" />
     <ClInclude Include="fms_black.h" />
     <ClInclude Include="fms_bsm.h" />
     <ClInclude Include="fms_prob.h" />
+    <ClInclude Include="fms_pwflat.h" />
     <ClInclude Include="fms_root1d.h" />
     <ClInclude Include="fms_root1d_newton.h" />
   </ItemGroup>
