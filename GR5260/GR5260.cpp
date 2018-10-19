@@ -37,9 +37,14 @@ void test_fms_poly_Hermite()
     for (auto x_ : x) {
         assert(1 == Hermite(0, x_));
         assert(x_ == Hermite(1, x_));
-        assert(x_*x_ - 1 == Hermite(2, x_));
-        assert(x_*(x_*x_ - 1) - 2 * x_ == Hermite(3, x_));
-        //??? put in tests for n = 4 and n = 5
+        X H2 = x_*x_ - 1;
+        assert(H2 == Hermite(2, x_));
+        X H3 = x_*H2 - 2*x_;
+        assert(H3 == Hermite(3, x_));
+        X H4 = x_*H3 - 3*H2;
+        assert(H4 == Hermite(4, x_));
+        X H5 = x_*H4 - 4*H3;
+        assert(H5 == Hermite(5, x_));
     }
 }
 
