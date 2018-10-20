@@ -70,7 +70,7 @@ double WINAPI xll_fms_poly_Hermite(WORD n, double x)
     return result;
 }
 
-//??? Implement an add-in NJR.CDF(kappa, x) that calls fms::prob::njr_cdf
+// Implement an add-in NJR.CDF(kappa, x) that calls fms::prob::njr_cdf
 AddIn xai_fms_prob_njr_pdf(
     Function(XLL_DOUBLE, L"?xll_fms_prob_njr_pdf", L"NJR.PDF")
     .Arg(XLL_FP, L"kappa", L"is an array of cumulants.")

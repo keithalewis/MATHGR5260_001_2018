@@ -9,6 +9,7 @@
 #include "fms_poly.h"
 #include "fms_root1d_newton.h"
 #include "fms_bootstrap.h"
+#include "fms_fixed_income.h"
 
 using namespace fms;
 
@@ -180,8 +181,8 @@ void test_fms_black_vega()
     auto dv = (v_ - _v) / (2 * eps);
     auto dv0 = black::vega(f, sigma, k, t);
 
-    auto diff = dv - dv0;
-    auto nn = diff / eps;
+//    auto diff = dv - dv0;
+//    auto nn = diff / eps;
 
     int n = 5; // 3
     assert(fabs(dv - dv0) < n*eps);
@@ -239,6 +240,237 @@ void test_fms_analytic()
     assert (x1.size() == 1);
 }
 
+template<class X>
+void test_fms_pwflat()
+{
+    using namespace fms::pwflat;
+
+    std::vector<X> t{1.,2.,3.}, f{.1,.2,.3};
+    std::vector<X> t_2{ 1. }, f_2{ .1 };
+
+    { // monotonic
+        ensure (strictly_increasing(std::begin(t), std::end(t)));
+        ensure (strictly_increasing(std::begin(f), std::end(f)));
+        X f2 = f[2];
+        f[2] = -1;
+        ensure (!strictly_increasing(std::begin(f), std::end(f)));
+        f[2] = f2;
+        ensure (!strictly_increasing(std::rbegin(f), std::rend(f)));
+    }
+    { // forward
+      //0, 0, null, null, null
+        ensure (isnan(value<int,X>(0, 0, nullptr, nullptr)));
+        //1, 0, null, null, null
+        ensure(isnan(value<int, X>(1, 0, nullptr, nullptr)));
+        //-1, 0, null, null, null
+        ensure(isnan(value<int, X>(-1, 0, nullptr, nullptr)));
+        //-1, 0, null, null, 0.2
+        ensure(isnan(value<int, X>(-1, 0, nullptr, nullptr, 0.2)));
+
+        int u;
+        u = 1;
+        X x{ 0.2 }, x_;
+        //1, 0, null, null, 0.2
+        x_ = fms::pwflat::value<int, X>(u, 0, nullptr, nullptr, x);
+        ensure(x_ == x);
+
+        X u_ [] = { -1, 0, 0.5, 1, 1.5 };
+        X a_ [] = { 0, 0.1, 0.1, 0.1, 0.2 };
+
+        for (int i = 0; i < 5; i++) {
+            if (i == 0 || i == 4) {
+                ensure(isnan(value<X, X>(u_[i], t_2.size(), t_2.data(), f_2.data())));
+            }
+            else {
+                x_ = fms::pwflat::value<X, X>(u_[i], t_2.size(), t_2.data(), f_2.data());
+                ensure(x_ == a_[i]);
+            }
+        }
+
+        for (int i = 0; i < 5; i++) {
+            if (i == 0) {
+                ensure(isnan(value<X, X>(u_[i], t_2.size(), t_2.data(), f_2.data(), 0.2)));
+            }
+            else {
+                x_ = fms::pwflat::value<X, X>(u_[i], t_2.size(), t_2.data(), f_2.data(), 0.2);
+                ensure(x_ == a_[i]);
+            }
+        }
+
+        for (int i = 0; i < 3; ++i)
+            ensure (f[i] == value(t[i], t.size(), t.data(), f.data()));
+    }
+    { // integral
+        X u;
+        u = -1;
+        ensure (isnan(integral(u, t.size(), t.data(), f.data())));
+        u = 4;
+        ensure (isnan(integral(u, t.size(), t.data(), f.data())));
+        u = 0;
+        ensure (0 == integral(u, t.size(), t.data(), f.data()));
+        u = 0.5;
+        ensure (.1*.5 == integral(u, t.size(), t.data(), f.data()));
+        u = 1;
+        ensure (.1 == integral(u, t.size(), t.data(), f.data()));
+        u = 1.5;
+        ensure (.1 + .2*.5 == integral(u, t.size(), t.data(), f.data()));
+        u = 2.5;
+        ensure (.1 + .2 + .3*.5 == integral(u, t.size(), t.data(), f.data()));
+        u = 3;
+        ensure (fabs(.1 + .2 + .3 - integral(u, t.size(), t.data(), f.data())) < 1e-10);
+        //		ensure (.1 + .2 + .3 != .6); 
+    }
+    { // discount
+        X u_[] = { -.5, 0, .5, 1, 1.5, 2, 2.5, 3, 3.5 };
+        X f_[] = {0, 0, .05, .1, .2, .3, .45, .6, .7};
+        for (int i = 0; i < 9; i++) {
+            if (i == 0 || i == 8) {
+                ensure(isnan(discount(u_[i], t.size(), t.data(), f.data())));
+            } 
+            else {
+                ensure(fabs(exp(-f_[i]) - discount(u_[i], t.size(), t.data(), f.data())) < 1e-10);
+            }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if (i == 0) {
+                ensure(_isnan(discount(u_[i], t.size(), t.data(), f.data(), 0.2)));
+            }
+            else {
+                ensure(fabs(exp(-f_[i]) - discount(u_[i], t.size(), t.data(), f.data(), 0.2)) < 1e-10);
+            }
+        }
+    }
+    { // spot
+        X u_[] = { -.5, 0, .5, 1, 1.5, 2, 2.5, 3, 3.5 };
+        X f_[] = { .1, .1, .1, .1, .2/1.5, .3/2, .45/2.5, .6/3, .7/3.5 };
+        for (int i = 0; i < 9; i++) {
+            if (i == 8) {
+                ensure(isnan(spot(u_[i], t.size(), t.data(), f.data())));
+            }
+            else {
+                ensure(fabs(f_[i] - spot(u_[i], t.size(), t.data(), f.data())) < 1e-10);
+            }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            ensure(fabs(f_[i] - spot(u_[i], t.size(), t.data(), f.data(), 0.2)) < 1e-10);
+        }
+    }
+    { // present_value
+        X u_[] = { 0, 1, 2, 3, 4};
+        X d_[] = { 0,
+            discount(u_[1], t.size(), t.data(), f.data(), 0.2),
+            discount(u_[2], t.size(), t.data(), f.data(), 0.2),
+            discount(u_[3], t.size(), t.data(), f.data(), 0.2),
+            discount(u_[4], t.size(), t.data(), f.data(), 0.2)
+        };
+        X c_[] = { 0, 1, 2, 3, 4 };
+
+        //ensure(isnan(present_value(1, u_, c_, t.size(), t.data(), f.data())));
+        //ensure(isnan(present_value(1, u_, c_, t.size(), t.data(), f.data(), 0.2)));
+
+        X sum = 0;
+        for (int i = 0; i < 5; i++) {
+            sum += c_[i] * d_[i];
+            if (i == 4) {
+                X tmp = present_value<X, X>(i + 1, u_, c_, t.size(), t.data(), f.data(), 0.2);
+                ensure(tmp == tmp);
+                ensure(fabs(sum - present_value(i + 1, u_, c_, t.size(), t.data(), f.data(), 0.2)) < 1e-10);
+                ensure(isnan(present_value(i + 1, u_, c_, t.size(), t.data(), f.data())));
+            }
+            else {
+                X tmp = present_value<X, X>(i + 1, u_, c_, t.size(), t.data(), f.data(), 0.2);
+                ensure(tmp == tmp);
+                ensure(fabs(sum - present_value(i + 1, u_, c_, t.size(), t.data(), f.data(), 0.2)) < 1e-10);
+                ensure(fabs(sum - present_value(i + 1, u_, c_, t.size(), t.data(), f.data())) < 1e-10);
+            }
+        }
+
+    }
+}
+
+template<class X>
+void test_fms_fixed_income_zero()
+{
+    using fms::fixed_income::zero;
+    using fms::pwflat::bootstrap;
+    using fms::pwflat::curve;
+
+    zero z(X(1));
+    zero z2(z); // copy constructor
+    assert (z == z2);
+    z = z2; // copy assignment
+    assert (z == z2);
+    assert (z.size() == 1);
+    auto u = z.time();
+    assert (u[0] == 1);
+    auto c = z.cash();
+    assert (c[0] == 1);
+
+    X r = X(0.01);
+    std::vector<X> T, F;
+
+    for (X u0 = 1; u0 < 10; u0 = u0 + X(1)) {
+        auto [t0,f0] = bootstrap(exp(-u0*r), zero(u0), curve(T.size(), T.data(), F.data()));
+        T.push_back(t0);
+        F.push_back(f0);
+    }
+
+    curve f(T.size(), T.data(), F.data());
+    X flo = std::numeric_limits<X>::max();
+    X fhi = -std::numeric_limits<X>::max();
+    for (X u0 = 0; u0 < 10; u0 = u0 + X(0.1)) {
+        X eps;
+        eps = f(u0) - r;
+        if (eps > fhi) fhi=eps;
+        if (eps < flo) flo=eps;
+    }
+    assert (flo > -std::numeric_limits<X>::epsilon());
+    assert (fhi < std::numeric_limits<X>::epsilon());
+}
+
+template<class X>
+void test_fms_pwflat_bootstrap()
+{
+    using fms::fixed_income::frequency;
+    using fms::fixed_income::zero;
+    using fms::fixed_income::cash_deposit;
+    using fms::fixed_income::forward_rate_agreement;
+    using fms::fixed_income::interest_rate_swap;
+    using fms::pwflat::bootstrap;
+    using fms::pwflat::curve;
+
+    X r = 0.02;
+    auto f0 = curve<X,X>(0, nullptr, nullptr, r);
+    assert (f0(100) == r);
+
+    std::vector<X> T, F;
+
+    auto cd0 = cash_deposit<X,X>(0.25, r);
+    auto cd1 = cash_deposit<X,X>(0.5, r);
+    auto cd2 = cash_deposit<X,X>(1.0, r);
+
+    auto fra0 = forward_rate_agreement<X,X>(1.,1.25,r);
+    auto fra1 = forward_rate_agreement<X,X>(1.25,1.5,r);
+    auto fra2 = forward_rate_agreement<X,X>(1.5,1.75,r);
+    auto fra3 = forward_rate_agreement<X,X>(1.75,2.,r);
+
+    auto irs0 = interest_rate_swap(3, r, frequency::semiannual);
+    auto irs1 = interest_rate_swap(5, r, frequency::quarterly);
+    auto irs2 = interest_rate_swap(10, r, frequency::monthly);
+
+    {    
+       auto [t,f] = bootstrap(f0.present_value(cd0), cd0, curve(T.size(), T.data(), F.data()));
+       T.push_back(t);
+       F.push_back(f);
+    }
+    //??? bootstrap using the rest of the cd's, fra's, and irs's.
+
+    auto f = curve<X,X>(T.size(), T.data(), F.data());
+    //??? Find min and max error of f(u) - f0(u) for u = 0, 0.1, ..., 10.
+    // See test_fms_fixed_income_zero above.
+}
 int main()
 {
     test_fms_analytic<double>();
@@ -256,4 +488,11 @@ int main()
 
     test_fms_black<double>();
     test_fms_black<float>();
+
+    test_fms_pwflat<double>();
+    //test_fms_pwflat<float>();
+
+    test_fms_fixed_income_zero<double>();
+
+    test_fms_pwflat_bootstrap<double>();
 }

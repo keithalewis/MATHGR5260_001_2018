@@ -17,14 +17,20 @@
 #include <algorithm> // adjacent_find
 #include <limits>    // quiet_Nan()
 #include <numeric>   // upper/lower_bound
+#include "fms_fixed_income_instrument.h"
 
 namespace fms::pwflat {
 
     // strictly increasing values
+    template<class I>
+    inline bool strictly_increasing(I b, I e)
+    {
+        return e == std::adjacent_find(b, e, std::greater_equal{});
+    }
     template<class T>
     inline bool strictly_increasing(size_t n, const T* t) noexcept
     {
-        return t + n == std::adjacent_find(t, t + n, std::greater_equal<T>{});
+        return strictly_increasing(t, t + n);
     }
 
     // piecewise flat curve
@@ -84,22 +90,22 @@ namespace fms::pwflat {
 
 
     // present value of instrument having cash flow c[i] at time u[i]
-    template<class T, class F>
-    inline F present_value(size_t m, const T* u, const F* c, size_t n, const T* t, const F* f, 
+    template<class U, class C, class T, class F>
+    inline F present_value(size_t m, const U* u, const C* c, size_t n, const T* t, const F* f, 
         const F& _f = std::numeric_limits<F>::quiet_NaN()) noexcept
     {
         F p{ 0 };
 
         for (size_t i = 0; i < m; ++i) {
-            p += c[i] * pwflat::discount(u[i], n, t, f, _f);
+            p += c[i] * pwflat::discount<T,F>(u[i], n, t, f, _f);
         }
 
         return p;
     }
 
     // derivative of present value wrt parallel shift of forward curve
-    template<class T, class F>
-    inline F duration(size_t m, const T* u, const F* c, size_t n, const T* t, const F* f, 
+    template<class U, class C, class T, class F>
+    inline F duration(size_t m, const U* u, const C* c, size_t n, const T* t, const F* f, 
         const F& _f = std::numeric_limits<F>::quiet_NaN()) noexcept
     {
         F d{ 0 };
@@ -112,9 +118,9 @@ namespace fms::pwflat {
     }
 
     // derivative of present value wrt parallel shift of forward curve after last curve time
-    template<class T, class F>
-    inline F partial_duration(size_t m, const T* u, const F* c, size_t n, const T* t, const F* f, 
-        const F& _f = std::numeric_limits<X>::quiet_NaN()) noexcept
+    template<class U, class C, class T, class F>
+    inline F partial_duration(size_t m, const U* u, const C* c, size_t n, const T* t, const F* f, 
+        const F& _f = std::numeric_limits<F>::quiet_NaN()) noexcept
     {
         F d{ 0 };
 
@@ -122,10 +128,86 @@ namespace fms::pwflat {
         size_t i0 = (n == 0) ? 0 : std::lower_bound(u, u + m, t[n - 1]) - u;
         T t0 = (n == 0) ? 0 : t[n - 1];
         for (size_t i = i0; i < m; ++i) {
-            d -= (u[i] - t0)*c[i] * pwflat::discount(u[i], n, t, f, _f);
+            d -= (u[i] - t0)*c[i] * pwflat::discount<T,F>(u[i], n, t, f, _f);
         }
 
         return d;
     }
+
+    // NVI instrument interface.
+    template<class T = double, class F = double>
+    class curve {
+        size_t n;
+        T* t;
+        F* f;
+        F _f;
+    public:
+        typedef T time_type;
+        typedef F rate_type;
+        curve(size_t n = 0, T* t = 0, F* f = 0, F _f = std::numeric_limits<F>::quiet_NaN())
+            : n(n), t(t), f(f), _f(_f)
+        { }
+        virtual ~curve() {}
+
+        // convenience functions
+        bool operator==(const curve& i) const
+        {
+            return size() == i.size()
+                && std::equal(time(), time() + size(), i.time())
+                && std::equal(rate(), rate() + size(), i.rate());
+        }
+        bool operator!=(const curve& i) const
+        {
+            return !operator==(i);
+        }
+
+        size_t   size() const { return _size(); }
+        const T* time() const { return _time(); }
+        const F* rate() const { return _rate(); }
+
+        F value(T u) const
+        {
+            return pwflat::value<T,F>(u, size(), time(), rate(), _f);
+        }
+        F operator()(T u) const
+        {
+            return value(u);
+        }
+        F discount(T u) const
+        {
+            return pwflat::discount<T,F>(u, size(), time(), rate(), _f);
+        }
+        F spot(T u) const
+        {
+            return spot<T,F>(u, size(), time(), rate(), _f);
+        }
+        F forward(T u) const
+        {
+            return pwflat::forward<T,F>(u, size(), time(), rate(), _f);
+        }
+        template<class U, class C>
+        F present_value(const fixed_income::instrument<U,C>& i)
+        {
+            return pwflat::present_value<U,C,T,F>(i.size(), i.time(), i.cash(), size(), time(), rate(), _f);
+        }
+        template<class U, class C>
+        F duration(const fixed_income::instrument<U,C>& i)
+        {
+            return pwflat::duration<U,C,T,F>(i.size(), i.time(), i.cash(), size(), time(), rate(), _f);
+        }
+    private:
+        virtual size_t _size() const
+        {
+            return n;
+        }
+        virtual T* _time() const
+        {
+            return t;
+        }
+        virtual F* _rate() const
+        {
+            return f;
+        }
+    };
 
 } // fms::pwflat

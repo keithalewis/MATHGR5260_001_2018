@@ -45,10 +45,28 @@
     <ClInclude Include="fms_pwflat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fms_fixed_income_cash_deposit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_fixed_income_foward_rate_agreement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_fixed_income_instrument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_fixed_income.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_fixed_income_interest_rate_swap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GR5260.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fms_fixed_income_zero.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

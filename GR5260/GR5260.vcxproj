@@ -84,12 +84,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -149,6 +151,11 @@
   <ItemGroup>
     <ClInclude Include="fms_analytic.h" />
     <ClInclude Include="fms_bootstrap.h" />
+    <ClInclude Include="fms_fixed_income.h" />
+    <ClInclude Include="fms_fixed_income_instrument.h" />
+    <ClInclude Include="fms_fixed_income_cash_deposit.h" />
+    <ClInclude Include="fms_fixed_income_foward_rate_agreement.h" />
+    <ClInclude Include="fms_fixed_income_interest_rate_swap.h" />
     <ClInclude Include="fms_njr.h" />
     <ClInclude Include="fms_poly.h" />
     <ClInclude Include="fms_black.h" />
@@ -159,6 +166,7 @@
     <ClInclude Include="fms_root1d_newton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="fms_fixed_income_zero.h" />
     <ClCompile Include="GR5260.cpp" />
   </ItemGroup>
   <ItemGroup>
