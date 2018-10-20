@@ -236,8 +236,16 @@ void test_fms_analytic()
 {
     using fms::analytic;
 
-    analytic<X> x1(1);
-    assert (x1.size() == 1);
+    {
+        analytic<X> x(1);
+        assert (x.order() == 1);
+        assert (x[0] == X(0));
+        assert (x(0) == X(0));
+        analytic<X> x2(x);
+        assert (x == x2);
+        x = X(3);
+        assert (x[0] == X(3));
+    }
 }
 
 template<class X>
