@@ -235,7 +235,7 @@ template<class X>
 void test_fms_analytic()
 {
     using fms::analytic;
-
+    
     {
         analytic<X> x(1);
         assert (x.order() == 1);
@@ -243,8 +243,43 @@ void test_fms_analytic()
         assert (x(0) == X(0));
         analytic<X> x2(x);
         assert (x == x2);
+        x = x2;
+        assert (x == x2);
         x = X(3);
         assert (x[0] == X(3));
+        x += x;
+        assert (x[0] == X(6));
+    }
+    {
+        analytic<X> x(2);
+        assert (x.order() == 2);
+        assert (x[0] == X(0));
+        assert (x[1] == X(0));
+        assert (x(0) == X(0));
+        assert (x(1) == X(0));
+        analytic<X> x2(x);
+        assert (x == x2);
+        x = x2;
+        assert (x == x2);
+    }
+    {
+        analytic<X> x(X(2),2);
+        assert (x.order() == 2);
+        assert (x[0] == X(2));
+        assert (x[1] == X(1));
+        assert (x(0) == X(2));
+        assert (x(1) == X(1));
+        x += x;
+        assert (x[0] == X(4));
+        assert (x[1] == X(2));
+        assert (x(0) == X(4));
+        assert (x(1) == X(2));
+
+        analytic x2(X(2),1);
+        assert (x2 != x);
+        x += x2;
+        assert (x[0] == X(6));
+        assert (x[1] == X(2));
     }
 }
 

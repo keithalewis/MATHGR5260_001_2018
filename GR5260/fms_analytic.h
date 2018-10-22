@@ -13,7 +13,7 @@ namespace fms {
     
     // Toeplitz matrix where first row is valarray<X>
     template<class X>
-    struct analytic {
+    class analytic {
         std::valarray<X> x;
 
         static constexpr X factorial(X n)
@@ -27,38 +27,26 @@ namespace fms {
 
             return n_;
         }
-        static bool all_true(const std::valarray<bool>& x)
+        auto left(size_t n) const // take
         {
-            return std::all_of(std::begin(x), std::end(x), [](bool b) { return b;});
-        }
-        
-        const std::valarray<X> left(size_t n) const
+            return std::slice(0, n, 1);
+        }        
+        auto right(size_t n) const
         {
-            return x[std::slice(0, n, 1)];
+            return std::slice(order() - n, n, 1);
         }
-        std::valarray<X>& left(size_t n)
-        {
-            return x[std::slice(0, n, 1)];
-        }
-        
-        const std::valarray<X> right(size_t n) const
-        {
-            return x[std::slice(order() - n, n, 1)];
-        }
-        std::valarray<X>& right(size_t n)
-        {
-            return x[std::slice(order() - n, n, 1)];
-        }
-
-        
+    public:
         explicit analytic(size_t n)
             : x(n)
         { }
-        // converting constructor for xI
-        analytic(X x, size_t n)
+        // converting constructor for x0 I + J
+        analytic(X x0, size_t n)
             : x(n)
         {
-            this->x[0] = x;
+            if (n > 0)
+                x[0] = x0;
+            if (n > 1)
+                x[1] = X(1);
         }
         analytic(const analytic& y)
             : x(y.x)
@@ -85,15 +73,15 @@ namespace fms {
         bool operator==(const analytic& y) const
         {
             if (order() > y.order()) {
-                return all_true(left(y.order()) == y.x)
-                    && all_true(right(order() - y.order()) == X(0));
+                return (x[left(y.order())] == y.x).min() == true
+                    && (x[right(y.order())] == X(0)).min() == true;
             }
             else if (order() < y.order()) {
-                return all_true(x == y.left(order()))
-                    && all_true(y.right(y.order() - order()) == X(0));
+                return (x == y.x[left(order())]).min() == true
+                    && (y.x[right(y.order())] == X(0)).min() == true;
             }
 
-            return all_true(x == y.x);
+            return (x == y.x).min() == true;
         }
         bool operator!=(const analytic& y) const
         {
@@ -125,13 +113,13 @@ namespace fms {
         analytic& operator+=(const analytic& y)
         {
             if (order() > y.order()) {
-                left(y.order()) += y.x;
+                x[left(y.order())] += y.x;
             }
-            else if (order() == y.order()) {
-                x += y.x;
+            else if (order() < y.order()) {
+                x += y.x[left(order())];
             }
             else {
-                x += y.left(order());
+                x += y.x;
             }
 
             return *this;
