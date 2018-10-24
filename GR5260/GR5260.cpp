@@ -280,6 +280,10 @@ void test_fms_analytic()
         x += x2;
         assert (x[0] == X(6));
         assert (x[1] == X(2));
+
+        x *= x;
+        x *= x;
+        x *= x;
     }
 }
 

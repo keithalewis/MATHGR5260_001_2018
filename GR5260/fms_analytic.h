@@ -129,5 +129,42 @@ namespace fms {
         {
             return x += y;
         }
+        analytic& operator-=(const analytic& y)
+        {
+            if (order() > y.order()) {
+                x[left(y.order())] -= y.x;
+            }
+            else if (order() < y.order()) {
+                x -= y.x[left(order())];
+            }
+            else {
+                x -= y.x;
+            }
+
+            return *this;
+        }
+        // non-member friend
+        friend analytic operator-(analytic x, const analytic& y)
+        {
+            return x -= y;
+        }
+        analytic& operator*=(const analytic& y)
+        {
+            std::valarray<X> z(order());
+            for (size_t i = 0; i < z.size(); ++i) {
+                for (size_t j = 0; j < x.size() && x.size() - j < y.order(); ++j) {
+                    z[i] += x[j]*y.x[z.size() - j];
+                }
+            }
+            std::swap(x, z);
+
+            return *this;
+        }
+        // non-member friend
+        friend analytic operator*(analytic x, const analytic& y)
+        {
+            return x *= y;
+        }
+
     };
 }
