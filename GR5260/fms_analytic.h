@@ -148,12 +148,16 @@ namespace fms {
         {
             return x -= y;
         }
+        // sum_i x_i J^i sum_j y_i J^j = sum_{i + j = k} x_i y_j J^k
         analytic& operator*=(const analytic& y)
         {
             std::valarray<X> z(order());
+
             for (size_t i = 0; i < z.size(); ++i) {
-                for (size_t j = 0; j < x.size() && x.size() - j < y.order(); ++j) {
-                    z[i] += x[j]*y.x[z.size() - j];
+                for (size_t j = 0; j <= i; ++j) {
+                    if (i - j < y.x.size()) {
+                        z[i] += x[j]*y.x[i - j];
+                    }
                 }
             }
             std::swap(x, z);

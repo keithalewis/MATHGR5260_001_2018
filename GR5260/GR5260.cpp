@@ -280,10 +280,26 @@ void test_fms_analytic()
         x += x2;
         assert (x[0] == X(6));
         assert (x[1] == X(2));
+    }
+    {
+        analytic x(X(2),3);
+        assert (x[0] == X(2));
+        assert (x[1] == X(1));
+        assert (x[2] == X(0));
+        
+        auto x2 = x;
+        x2 *= x;
+        // (2 + J)*(2 + J) = 4 + 2*2J + J^2
+        assert (x2[0] == X(4));
+        assert (x2[1] == X(4));
+        assert (x2[2] == X(1));
 
-        x *= x;
-        x *= x;
-        x *= x;
+        auto x3 = x*x;
+        assert (x3 == x2);
+
+        analytic x4(X(2),2);
+        auto x5 = x*x4;
+        assert (x5 == x2);
     }
 }
 
