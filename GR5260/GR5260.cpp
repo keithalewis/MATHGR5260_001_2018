@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <chrono>
 #include <functional>
+#include <random>
 #include "fms_analytic.h"
 #include "fms_black.h"
 #include "fms_njr.h"
@@ -10,6 +11,7 @@
 #include "fms_root1d_newton.h"
 #include "fms_bootstrap.h"
 #include "fms_fixed_income.h"
+#include "fms_ho_lee.h"
 
 using namespace fms;
 
@@ -586,6 +588,40 @@ void test_fms_pwflat_bootstrap()
     assert (flo > -3*std::numeric_limits<X>::epsilon());
     assert (fhi < 3*std::numeric_limits<X>::epsilon());
 }
+
+//??? fix any typos
+template<class X>
+void test_fms_ho_lee()
+{
+    X u = X(1), v = X(1.25);
+    X f = X(0.02), k = X(0.02), sigma = X(0.20);
+    X dcf = v - u;
+    pwflat::curve<X,X> F(f); // constant curve
+    X Du = F.discount(u);
+    X Dv = F.discount(v);
+
+    X p = ho_lee::floor(k, dcf, u, v, Du, Dv, sigma);
+
+    X eld = ho_lee::ElogD_(u, v, Du, Dv, sigma);
+    X vld = ho_lee::VarlogD_(u, v, Du, Dv, sigma);
+    std::default_random_engine dre;
+    std::normal_distribution<double> Z(eld, sqrt(vld));
+
+    size_t N = 10000;
+    X ep = X(0); // Monte Carlo average of floor price.
+    for (size_t n = 1; n <= N; ++n) {
+        auto r = (1/exp(Z(dre)) - 1)/dcf; // Ho-Lee forward rate
+        auto x = std::max<X>(k - r, 0);
+        // s[n] = (x[1] + ... + x[n])/n
+        // n s[n] - (n - 1) s[n - 1] = x[n]
+        // s[n] = (1 - 1/n) s[n - 1] + x[n]/n
+        // s[n] = s[n - 1] + (x[n] - s[n - 1])/n
+        ep += (x - ep)/n;
+    }
+    // should be within 2 standard deviations
+    assert(fabs(p - ep)/p < 2/sqrt(X(N)));
+}
+
 int main()
 {
     test_fms_analytic<double>();
@@ -610,4 +646,6 @@ int main()
     test_fms_fixed_income_zero<double>();
 
     test_fms_pwflat_bootstrap<double>();
+
+    test_fms_ho_lee<double>();
 }

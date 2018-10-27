@@ -42,24 +42,6 @@ In particular
          = exp(-int_0^t [phi(s) - sigma^2 s^2/2] ds)
 
 Since D(t) = exp(-int_0^t f(s) ds) we have f(t) = phi(t) - sigma^2 t^2/2.
-
-A (interest rate) _floor_ over the interval [u,v] with strike k pays
-max{k - F^delta_u(u,v), 0} at time v, where F^delta_u(u,v) is the forward rate
-at time u over the interval [u,v] using day count basis delta. 
-
-Recall the forward at time t over [u,v] is F^delta_t(u,v) = (D_t(u)/D_t(v) - 1)/dcf
-where dcf is the day count fraction.
-
-The floor value is
-
-    E max{k - F,0} D_v = E max{k - (1/D_u(v) - 1)/delta, 0} D_v
-                       = ???
-                       = ??? Document the derivation of the formula below here.
-                       = ???
-                       = D(u) E max{(k + 1/delta)D_u(v)e^gamma - 1/delta, 0}
-
-where gamma = Cov(log D_u(v), log D_u)
-                       
 */
 
 namespace fms::ho_lee {
@@ -85,17 +67,36 @@ namespace fms::ho_lee {
         return 0; //???
     }
 
-    // E max{k - F,0} D_v = D(u) E max{(k + 1/delta)D_u(v)e^gamma - 1/delta, 0}
+    /*
+    A (interest rate) _floor_ over the interval [u,v] with strike k pays
+        max{k - F^delta_u(u,v), 0} at time v, where F^delta_u(u,v) is the forward rate
+        at time u over the interval [u,v] using day count basis delta. 
+
+        Recall the forward at time t over [u,v] is F^delta_t(u,v) = (D_t(u)/D_t(v) - 1)/dcf
+    where dcf is the day count fraction corresponding to delta, u, and v;
+
+    The floor value is
+
+        E max{k - F,0} D_v = E max{k - (1/D_u(v) - 1)/dcf, 0} D_v
+        = ???
+        = ??? Document the derivation of the formula below.
+        = ???
+        = D(u) E max{(k + 1/dcf)D_u(v)e^gamma - 1/dcf, 0}
+
+    where gamma = Cov(log D_u(v), log D_u).
+    */
+
+    // E max{k - F,0} D_v = D(u) E max{(k + 1/dcf)D_u(v)e^gamma - 1/dcf, 0}
     // Use Black-Scholes/Merton to value an interest rate floor.
     template<class X = double>
-    inline auto floor(X k, X delta, X u, X v, X Du, X Dv, X sigma)
+    inline auto floor(X k, X dcf, X u, X v, X Du, X Dv, X sigma)
     {
-        X R = -log(Du)/t; 
+        X R = -log(Du)/u; 
         X S = 0; //??? B-S/M spot
         X Sigma = 0; //??? B-S/M volatility
         X K = 0; //??? B-S/M strike
 
         // Black-Scholes/Merton call value.
-        return S - K*Du + bms::value(R, S, Sigma, K, u);
+        return S - K*Du + bsm::value(R, S, Sigma, K, u);
     }
 }

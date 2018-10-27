@@ -144,6 +144,10 @@ namespace fms::pwflat {
     public:
         typedef T time_type;
         typedef F rate_type;
+        // constant value
+        curve(F f)
+            : curve(0, nullptr, nullptr, f)
+        { }
         curve(size_t n = 0, T* t = 0, F* f = 0, F _f = std::numeric_limits<F>::quiet_NaN())
             : n(n), t(t), f(f), _f(_f)
         { }
