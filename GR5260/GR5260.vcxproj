@@ -156,6 +156,7 @@
     <ClInclude Include="fms_fixed_income_cash_deposit.h" />
     <ClInclude Include="fms_fixed_income_foward_rate_agreement.h" />
     <ClInclude Include="fms_fixed_income_interest_rate_swap.h" />
+    <ClInclude Include="fms_ho_lee.h" />
     <ClInclude Include="fms_njr.h" />
     <ClInclude Include="fms_poly.h" />
     <ClInclude Include="fms_black.h" />
