@@ -11,17 +11,22 @@ namespace fms::fixed_income {
 
     template<class U = double, class C = double>
     class interest_rate_swap : public instrument<U,C> {
+        U u;
+        C r;
+        frequency f;
         std::vector<U> t;
         std::vector<C> c;
-        frequency f;
     public:
         interest_rate_swap(U u, C r, frequency f)
-            : t(/*???*/), c(/*???*/), f(f)
+            : u(u), r(r), f(f), t(1 + static_cast<U>(f)*u), c(1 + static_cast<U>(f)*u)
         {
-            u = u;
-            r = r;
-            // t[j] = ???
-            // c[j] = ???
+            t[0] = 0;
+            c[0] = -1;
+            for (size_t i = 1; i < t.size(); ++i) {
+                t[i] = i/static_cast<U>(f);
+                c[i] = r/static_cast<U>(f);
+            }
+            c.back() += 1;
         }
     private:
         size_t _size() const override 

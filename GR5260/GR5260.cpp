@@ -475,7 +475,7 @@ void test_fms_fixed_income_zero()
     std::vector<X> T, F;
 
     for (X u0 = 1; u0 < 10; u0 = u0 + X(1)) {
-        auto [t0,f0] = bootstrap(exp(-u0*r), zero(u0), curve(T.size(), T.data(), F.data()));
+        auto [t0,f0] = bootstrap(exp(-r*u0), zero(u0), curve(T.size(), T.data(), F.data()));
         T.push_back(t0);
         F.push_back(f0);
     }
@@ -528,11 +528,63 @@ void test_fms_pwflat_bootstrap()
        T.push_back(t);
        F.push_back(f);
     }
-    //??? bootstrap using the rest of the cd's, fra's, and irs's.
+    {    
+        auto [t,f] = bootstrap(f0.present_value(cd1), cd1, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(cd2), cd2, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(fra0), fra0, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(fra1), fra1, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(fra2), fra2, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(fra3), fra3, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(irs0), irs0, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(irs1), irs1, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
+    {    
+        auto [t,f] = bootstrap(f0.present_value(irs2), irs2, curve(T.size(), T.data(), F.data()));
+        T.push_back(t);
+        F.push_back(f);
+    }
 
     auto f = curve<X,X>(T.size(), T.data(), F.data());
-    //??? Find min and max error of f(u) - f0(u) for u = 0, 0.1, ..., 10.
-    // See test_fms_fixed_income_zero above.
+    X flo = std::numeric_limits<X>::max();
+    X fhi = -std::numeric_limits<X>::max();
+    for (X u0 = 0; u0 < 10; u0 = u0 + X(0.1)) {
+        X eps;
+        eps = f(u0) - r;
+        if (eps > fhi) fhi=eps;
+        if (eps < flo) flo=eps;
+    }
+    assert (flo > -3*std::numeric_limits<X>::epsilon());
+    assert (fhi < 3*std::numeric_limits<X>::epsilon());
 }
 int main()
 {
