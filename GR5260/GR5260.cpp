@@ -265,7 +265,7 @@ void test_fms_analytic()
         assert (x == x2);
     }
     {
-        analytic<X> x(X(2),2);
+        analytic<X> x{X(2),X(1)};
         assert (x.order() == 2);
         assert (x[0] == X(2));
         assert (x[1] == X(1));
@@ -277,14 +277,14 @@ void test_fms_analytic()
         assert (x(0) == X(4));
         assert (x(1) == X(2));
 
-        analytic x2(X(2),1);
+        analytic x2{X(2)};
         assert (x2 != x);
         x += x2;
         assert (x[0] == X(6));
         assert (x[1] == X(2));
     }
     {
-        analytic x(X(2),3);
+        analytic x{X(2),X(1),X(0)};
         assert (x[0] == X(2));
         assert (x[1] == X(1));
         assert (x[2] == X(0));
@@ -299,7 +299,7 @@ void test_fms_analytic()
         auto x3 = x*x;
         assert (x3 == x2);
 
-        analytic x4(X(2),2);
+        analytic x4{X(2),X(1)};
         auto x5 = x*x4;
         assert (x5 == x2);
     }

@@ -27,11 +27,11 @@ namespace fms {
 
             return n_;
         }
-        auto left(size_t n) const // take
+        auto left(size_t n) const // take n
         {
             return std::slice(0, n, 1);
         }        
-        auto right(size_t n) const
+        auto right(size_t n) const // take -n
         {
             return std::slice(order() - n, n, 1);
         }
@@ -40,13 +40,9 @@ namespace fms {
             : x(n)
         { }
         // converting constructor for x0 I + J
-        analytic(X x0, size_t n)
-            : x(n)
+        analytic(std::initializer_list<X> xs)
+            : x(xs.begin(), xs.size())
         {
-            if (n > 0)
-                x[0] = x0;
-            if (n > 1)
-                x[1] = X(1);
         }
         analytic(const analytic& y)
             : x(y.x)
@@ -148,6 +144,7 @@ namespace fms {
         {
             return x -= y;
         }
+
         // sum_i x_i J^i sum_j y_i J^j = sum_{i + j = k} x_i y_j J^k
         analytic& operator*=(const analytic& y)
         {
