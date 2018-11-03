@@ -6,6 +6,7 @@
 #include <random>
 #include "fms_analytic.h"
 #include "fms_black.h"
+#include "fms_brownian.h"
 #include "fms_njr.h"
 #include "fms_poly.h"
 #include "fms_root1d_newton.h"
@@ -25,6 +26,38 @@ inline auto timer(const std::function<void(void)>& f, size_t count = 1)
     std::chrono::duration<double> elapsed = stop-start;
 
     return elapsed.count(); // duration in seconds
+}
+
+// [f() + ... f()]/n
+template<class X>
+inline X mean(const std::function<X()>& f, size_t n)
+{
+     X m = 0;
+
+    for (size_t i = 1; i <= n; ++i)
+        m += (f() - m)/i;
+
+    return m;
+}
+
+template<class X>
+void test_mean()
+{
+    for (size_t n = 1; n < 10; ++n) {
+        X k = 0;
+        std::function<X()> f = [n,&k]() { return ++k/n; };
+        X m = mean(f, n);
+        // (1/n + ... + n/n)/n = n(n+1)/2n^2
+        assert (m == X(n + 1)/(2*n));
+    }
+
+    std::default_random_engine dre;
+    std::uniform_real_distribution<X> u;
+
+    size_t N = 10000;
+    std::function<X()> f = [u,&dre]() { return u(dre); };
+    X m = mean(f, N);
+    assert (fabs(m - X(0.5) < X(1)/sqrt(N)));
 }
 
 template<class X>
@@ -589,6 +622,41 @@ void test_fms_pwflat_bootstrap()
     assert (fhi < 3*std::numeric_limits<X>::epsilon());
 }
 
+template<class X>
+void test_fms_brownian()
+{
+    // Show Cov(B_j(1), B_k(1) = rho_{j,k}.
+    X e[] = {X(0.1), X(0.2), X(0.3)};
+    fms::correlation<X> corr(2, e); // packed
+    fms::brownian<X> B(corr);
+    std::default_random_engine dre;
+
+    size_t N = 10000; // number of simulations
+    for (size_t j = 0; j < B.size(); ++j) {
+        for (size_t k = 0; k < B.size(); ++k) {
+            auto rho = corr.rho(j, k);
+            // ??? estimate Cov(B_j(1), B_k(1)) = corr(B_j(1), B_k(1))
+            // ??? and test if it is within 2 standard deviations for N simulations
+            std::function<X()> Bjk = [j,k,&B,&dre]() {
+                B.reset();
+                B.advance(1, dre);
+                const X* b = B.data();
+                return b[j]*b[k];
+            };
+            auto r = mean(Bjk, N);
+            X eps; 
+            eps = r - rho;
+            eps = eps;
+        }
+    }
+}
+
+template<class X>
+void test_ElogD_()
+{
+    // log D_t(u) =  -sigma(u - t)B_t - int_t^u [phi(s) - sigma^2(u - s)^2/2] ds).
+
+}
 //??? fix any typos
 template<class X>
 void test_fms_ho_lee()
@@ -603,27 +671,79 @@ void test_fms_ho_lee()
     X p = ho_lee::floor(k, dcf, u, v, Du, Dv, sigma);
 
     X eld = ho_lee::ElogD_(u, v, Du, Dv, sigma);
-    X vld = ho_lee::VarlogD_(u, v, Du, Dv, sigma);
+    X vld = ho_lee::VarlogD_(u, v, sigma);
     std::default_random_engine dre;
     std::normal_distribution<double> Z(eld, sqrt(vld));
 
-    size_t N = 10000;
-    X ep = X(0); // Monte Carlo average of floor price.
-    for (size_t n = 1; n <= N; ++n) {
+    std::function<X()> p_ = [k,dcf,&Z,&dre]() {
         auto r = (1/exp(Z(dre)) - 1)/dcf; // Ho-Lee forward rate
-        auto x = std::max<X>(k - r, 0);
-        // s[n] = (x[1] + ... + x[n])/n
-        // n s[n] - (n - 1) s[n - 1] = x[n]
-        // s[n] = (1 - 1/n) s[n - 1] + x[n]/n
-        // s[n] = s[n - 1] + (x[n] - s[n - 1])/n
-        ep += (x - ep)/n;
-    }
+        return std::max<X>(k - r, 0);
+    };
+    size_t N = 10000;
+    X ep = mean<X>(p_, N);
     // should be within 2 standard deviations
-    assert(fabs(p - ep)/p < 2/sqrt(X(N)));
+    //assert(fabs(p - ep)/p < 2/sqrt(X(N)));
+}
+
+template<class X>
+#pragma warning(disable: 4456) // declaration of 'corr' hides previous local declaration)
+void test_fms_correlation()
+{
+    double eps = std::numeric_limits<double>::epsilon();
+    //using fms::correlation<double>::packed();
+    {
+        fms::correlation<> corr;
+    }
+    {
+        fms::correlation<> corr(1, nullptr);
+        ensure (corr.size() == 1);
+        ensure (corr.rho(0, 0) == 1);
+    }
+    {
+        double rho = 0.5;
+        fms::correlation<> corr(2, &rho, fms::correlation<>::packed);
+        ensure (corr.size() == 2);
+        ensure (corr.rho(0, 0) == 1);
+        ensure (corr.rho(0, 1) == 0.5);
+        ensure (corr.rho(1, 0) == 0.5);
+        ensure (fabs(corr.rho(1, 1) - 1) <= eps);
+    }
+    {
+        double rho[] = {0.5,  0.4, 0.3};
+        fms::correlation<> corr(3, rho);
+        ensure (corr.size() == 3);
+        ensure (corr.rho(0, 0) == 1);
+        ensure (corr.rho(0, 1) == 0.5);
+        ensure (corr.rho(0, 2) == 0.4);
+        ensure (corr.rho(1, 0) == 0.5);
+        ensure (fabs(corr.rho(1, 1) - 1) <= eps);
+        ensure (corr.rho(1, 2) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
+        ensure (corr.rho(2, 0) == 0.4);
+        ensure (corr.rho(2, 1) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
+        ensure (fabs(corr.rho(2, 2) - 1) <= eps);
+    }
+    {
+        double rho[] = {0.5, 0, 0.4, 0.3};
+        fms::correlation<> corr(3, rho, fms::correlation<>::lower);
+        ensure (corr.size() == 3);
+        ensure (corr.rho(0, 0) == 1);
+        ensure (corr.rho(0, 1) == 0.5);
+        ensure (corr.rho(0, 2) == 0.4);
+        ensure (corr.rho(1, 0) == 0.5);
+        ensure (fabs(corr.rho(1, 1) - 1) <= eps);
+        ensure (corr.rho(1, 2) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
+        ensure (corr.rho(2, 0) == 0.4);
+        ensure (corr.rho(2, 1) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
+        ensure (fabs(corr.rho(2, 2) - 1) <= eps);
+    }
+
 }
 
 int main()
 {
+    test_mean<double>();
+    test_fms_correlation<double>();
+    test_fms_brownian<double>();
     test_fms_analytic<double>();
 
     test_fms_poly_Hermite<double>();

@@ -151,18 +151,21 @@
   <ItemGroup>
     <ClInclude Include="fms_analytic.h" />
     <ClInclude Include="fms_bootstrap.h" />
+    <ClInclude Include="fms_correlation.h" />
     <ClInclude Include="fms_fixed_income.h" />
     <ClInclude Include="fms_fixed_income_instrument.h" />
     <ClInclude Include="fms_fixed_income_cash_deposit.h" />
     <ClInclude Include="fms_fixed_income_foward_rate_agreement.h" />
     <ClInclude Include="fms_fixed_income_interest_rate_swap.h" />
     <ClInclude Include="fms_ho_lee.h" />
+    <ClInclude Include="fms_lmm.h" />
     <ClInclude Include="fms_njr.h" />
     <ClInclude Include="fms_poly.h" />
     <ClInclude Include="fms_black.h" />
     <ClInclude Include="fms_bsm.h" />
     <ClInclude Include="fms_prob.h" />
     <ClInclude Include="fms_pwflat.h" />
+    <ClInclude Include="fms_brownian.h" />
     <ClInclude Include="fms_root1d.h" />
     <ClInclude Include="fms_root1d_newton.h" />
   </ItemGroup>
