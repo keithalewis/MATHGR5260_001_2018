@@ -627,26 +627,16 @@ void test_fms_brownian()
 {
     // Show Cov(B_j(1), B_k(1) = rho_{j,k}.
     X e[] = {X(0.1), X(0.2), X(0.3)};
-    fms::correlation<X> corr(2, e); // packed
+    fms::correlation<X> corr(3, e); // packed
     fms::brownian<X> B(corr);
     std::default_random_engine dre;
 
-    size_t N = 10000; // number of simulations
+    size_t N = 100000; // number of simulations
     for (size_t j = 0; j < B.size(); ++j) {
         for (size_t k = 0; k < B.size(); ++k) {
             auto rho = corr.rho(j, k);
             // ??? estimate Cov(B_j(1), B_k(1)) = corr(B_j(1), B_k(1))
             // ??? and test if it is within 2 standard deviations for N simulations
-            std::function<X()> Bjk = [j,k,&B,&dre]() {
-                B.reset();
-                B.advance(1, dre);
-                const X* b = B.data();
-                return b[j]*b[k];
-            };
-            auto r = mean(Bjk, N);
-            X eps; 
-            eps = r - rho;
-            eps = eps;
         }
     }
 }
@@ -657,7 +647,7 @@ void test_ElogD_()
     // log D_t(u) =  -sigma(u - t)B_t - int_t^u [phi(s) - sigma^2(u - s)^2/2] ds).
 
 }
-//??? fix any typos
+
 template<class X>
 void test_fms_ho_lee()
 {

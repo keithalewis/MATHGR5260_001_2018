@@ -34,7 +34,7 @@ namespace fms {
             for (size_t i = 0; i < B.size(); ++i) {
                 auto dB = sqrtdt*Z(r);
                 for (size_t j = i; j < B.size(); ++j) {
-                    B[i] += e(j, i)*dB;
+                    B[j] += e(j, i)*dB;
                 }
             }
             t = u;
