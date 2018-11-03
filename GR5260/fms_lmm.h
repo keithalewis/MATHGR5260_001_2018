@@ -23,7 +23,6 @@ and D_t(u) = exp_t^u f_t(s) ds, where s -> f_t(s) is the forward curve at time t
 Given LMM data and a time t, we would like to generate a sample forward
 curve at time t, s -> f_t(s). Note f_0(s) = f(s).
 
-
 */
 
 namespace fms {
@@ -44,8 +43,7 @@ namespace fms {
         {
             B.reset();
         }
-        // Populate t_ and f_ with sample forward curve at time u
-        // return index of first t[i] > u
+        // Populate f_ with sample forward curve at time u and return index of first t[i] > u
         size_t advance(T u, size_t n_, F* f_)
         {
             B.advance(u, r);
