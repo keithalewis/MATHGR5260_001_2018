@@ -631,7 +631,7 @@ void test_fms_brownian()
     fms::brownian<X> B(corr);
     std::default_random_engine dre;
 
-    size_t N = 100000; // number of simulations
+    size_t N = 100'000; // number of simulations
     for (size_t j = 0; j < B.size(); ++j) {
         for (size_t k = 0; k < B.size(); ++k) {
             auto rho = corr.rho(j, k);
@@ -639,6 +639,16 @@ void test_fms_brownian()
             // ??? and test if it is within 2 standard deviations for N simulations
         }
     }
+}
+
+// int_0^1 B_s ds
+template<class X>
+inline X intB(size_t n)
+{
+    X dt = X(1)/n;
+    std::default_random_engine dre;
+    std::normal_distribution dB(0,sqrt(dt));
+
 }
 
 template<class X>

@@ -7,7 +7,7 @@
 
 namespace fms {
 
-    // n-dimensional Brownian samples
+    // n-dimensional correlated Brownian samples
     template<class T = double, class X = double>
     class brownian {
         T t;
@@ -31,12 +31,14 @@ namespace fms {
         void advance(X u, R& r)
         {
             auto sqrtdt = sqrt(u - t); //B += e . dB
+
             for (size_t i = 0; i < B.size(); ++i) {
                 auto dB = sqrtdt*Z(r);
                 for (size_t j = i; j < B.size(); ++j) {
                     B[j] += e(j, i)*dB;
                 }
             }
+
             t = u;
         }
         // number of dimensions
@@ -47,10 +49,6 @@ namespace fms {
         const X* data() const
         {
             return B.data();
-        }
-        operator const std::vector<X>&() const
-        {
-            return B;
         }
     };
 
