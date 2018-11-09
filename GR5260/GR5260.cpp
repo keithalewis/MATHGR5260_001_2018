@@ -57,7 +57,7 @@ void test_mean()
     size_t N = 10000;
     std::function<X()> f = [u,&dre]() { return u(dre); };
     X m = mean(f, N);
-    assert (fabs(m - X(0.5) < X(1)/sqrt(N)));
+    assert (fabs(m - X(0.5)) < X(1)/sqrt(N));
 }
 
 template<class X>
@@ -625,37 +625,55 @@ void test_fms_pwflat_bootstrap()
 template<class X>
 void test_fms_brownian()
 {
-    // Show Cov(B_j(1), B_k(1) = rho_{j,k}.
+    // Show corr(B_1[j], B_1[k]) = rho_{j,k}
     X e[] = {X(0.1), X(0.2), X(0.3)};
     fms::correlation<X> corr(3, e); // packed
+    // Cholesky decompostion is
+    // [ 1   0               0                      ]
+    // [ 0.1 sqrt(1 - 0.1^2) 0                      ]
+    // [ 0.2 0.3             sqrt(1 - 0.2^2 - 0.3^2)]
     fms::brownian<X> B(corr);
     std::default_random_engine dre;
 
-    size_t N = 100'000; // number of simulations
+    size_t N = 10'000; // number of simulations
     for (size_t j = 0; j < B.size(); ++j) {
         for (size_t k = 0; k < B.size(); ++k) {
-            auto rho = corr.rho(j, k);
-            // ??? estimate Cov(B_j(1), B_k(1)) = corr(B_j(1), B_k(1))
-            // ??? and test if it is within 2 standard deviations for N simulations
+            X rho = corr.rho(j, k);
+            // corr(B_1[j],B_1[k]) = Cov(B_1[j],B_1[k]) = E B_1[j] B_1[k]
+            std::function<X()> f = [j,k,&B,&dre]() { B.reset(); B.advance(1,dre); return B[j]*B[k]; };
+            assert (fabs(mean(f,N) - rho) < X(3)/sqrt(N));
         }
     }
 }
-
+/*
 // int_0^1 B_s ds
 template<class X>
 inline X intB(size_t n)
 {
     X dt = X(1)/n;
     std::default_random_engine dre;
-    std::normal_distribution dB(0,sqrt(dt));
+    std::normal_distribution<X> dB(0,sqrt(dt));
 
+    X B = X(0);
+    for (size_t i = 0; i < n; ++i) {
+        B += dB(dre);
+    }
+    return B;
 }
-
+// Var int_0^1 B_s ds = 1/3
+template<class X>
+inline void test_intB()
+{
+   size_t N = 5000;
+   std::function<X()> f = [N]() { X B = intB<X>(N); return B*B; };
+   auto var = mean(f, N);
+   var = var;
+}
+*/
 template<class X>
 void test_ElogD_()
 {
     // log D_t(u) =  -sigma(u - t)B_t - int_t^u [phi(s) - sigma^2(u - s)^2/2] ds).
-
 }
 
 template<class X>
@@ -741,6 +759,7 @@ void test_fms_correlation()
 
 int main()
 {
+//    test_intB<double>();
     test_mean<double>();
     test_fms_correlation<double>();
     test_fms_brownian<double>();

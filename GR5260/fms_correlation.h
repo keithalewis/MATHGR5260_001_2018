@@ -18,7 +18,7 @@ namespace fms {
         std::vector<std::vector<X>> e_;
     public:
         enum layout {
-            lower,  // e_10, 0, ...; e_20, e_21, 0 ...;
+            lower,  // e_00, 0, ...; e_10, e_11, 0 ...;
             packed, // e_10; e_20, e_21; ...
         };
         correlation()

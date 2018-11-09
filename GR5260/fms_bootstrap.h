@@ -59,7 +59,7 @@ namespace fms::pwflat {
 
         if (n > 0 && _f != 0) {
             auto pv0 = pv(F(0));
-            auto pv_ = pv(10*_f); // magic value!!!
+            auto pv_ = pv(10*_f); // magic number!
             ensure (-pv0 == copysign(pv0, pv_)); // root is bounded
         }
 
@@ -70,7 +70,7 @@ namespace fms::pwflat {
 		return std::make_pair(u_,_f);
     }
 
-    // Bootstrap a curve using one instrument at its price.
+    // Bootstrap a curve using an instrument and its price.
     template<class U = double, class C = double, class T = double, class F = double>
     inline std::pair<T,F> bootstrap(F p, 
         const fixed_income::instrument<U,C>& i,

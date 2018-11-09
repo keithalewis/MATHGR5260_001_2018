@@ -13,7 +13,6 @@ namespace fms {
         T t;
         fms::correlation<X> e;
         std::vector<X> B;
-        std::normal_distribution<X> Z;
     public:
         brownian(const fms::correlation<X>& e)
             : t(T(0)), e(e), B(e.size())
@@ -30,10 +29,11 @@ namespace fms {
         template<class R> // random engine
         void advance(X u, R& r)
         {
-            auto sqrtdt = sqrt(u - t); //B += e . dB
+            std::normal_distribution<X> Z(0, sqrt(u - t));
 
+            // B += e . dB
             for (size_t i = 0; i < B.size(); ++i) {
-                auto dB = sqrtdt*Z(r);
+                auto dB = Z(r);
                 for (size_t j = i; j < B.size(); ++j) {
                     B[j] += e(j, i)*dB;
                 }
@@ -49,6 +49,14 @@ namespace fms {
         const X* data() const
         {
             return B.data();
+        }
+        X operator[](size_t i) const
+        {
+            return B[i];
+        }
+        T time() const
+        {
+            return t;
         }
     };
 
