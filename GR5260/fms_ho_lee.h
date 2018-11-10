@@ -53,7 +53,7 @@ namespace fms::ho_lee {
         return 0; //???
     }
 
-    // Variance of log D_t(u) = -int_t^u [phi(s) - sigma^2(u - s)^2/2] ds
+    // Variance of log D_t(u) = sigma^2(u - t)^2 t/2
     template<class X = double>
     inline auto VarlogD_(X t, X u, X Dt, X Du, X sigma)
     {
