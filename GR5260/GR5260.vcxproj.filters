@@ -63,6 +63,18 @@
     <ClInclude Include="fms_ho_lee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fms_lmm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_correlation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_brownian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fms_swaption.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GR5260.cpp">

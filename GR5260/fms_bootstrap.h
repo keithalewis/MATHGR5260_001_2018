@@ -57,7 +57,11 @@ namespace fms::pwflat {
 		if (n > 0)
 			_f = f[n-1];
 
-        //!!!Check if a solution is possible.
+        if (n > 0 && _f != 0) {
+            auto pv0 = pv(F(0));
+            auto pv_ = pv(10*_f); // magic number!
+            ensure (-pv0 == copysign(pv0, pv_)); // root is bounded
+        }
 
         root1d::newton_solver<F,F> solver(_f, pv, dpv);
 
@@ -65,6 +69,8 @@ namespace fms::pwflat {
 
 		return std::make_pair(u_,_f);
     }
+
+    // Bootstrap a curve using an instrument and its price.
     template<class U = double, class C = double, class T = double, class F = double>
     inline std::pair<T,F> bootstrap(F p, 
         const fixed_income::instrument<U,C>& i,

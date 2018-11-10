@@ -14,11 +14,11 @@ namespace fms::fixed_income {
     template<class U = double, class C = double>
     class instrument {
         size_t n;
-        U* u;
-        C* c;
+        const U* u;
+        const C* c;
     public:
         // For pre-allocated and unmanaged memory.
-        instrument(size_t n = 0, U* u = 0, C* c = 0)
+        instrument(size_t n = 0, const U* u = 0, const C* c = 0)
             : n(n), u(u), c(c)
         { }
         virtual ~instrument() {}
