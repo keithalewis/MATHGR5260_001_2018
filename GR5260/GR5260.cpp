@@ -640,7 +640,11 @@ void test_fms_brownian()
         for (size_t k = 0; k < B.size(); ++k) {
             X rho = corr.rho(j, k);
             // corr(B_1[j],B_1[k]) = Cov(B_1[j],B_1[k]) = E B_1[j] B_1[k]
-            std::function<X()> f = [j,k,&B,&dre]() { B.reset(); B.advance(1,dre); return B[j]*B[k]; };
+            std::function<X()> f = [j,k,&B,&dre]() { 
+                B.reset(); 
+                B.advance(1,dre); 
+                return B[j]*B[k]; 
+            };
             assert (fabs(mean(f,N) - rho) < X(3)/sqrt(N));
         }
     }

@@ -42,24 +42,25 @@ namespace fms {
         {
             B.reset();
         }
-        // Populate f_ with sample forward curve at time u and return index of first t[i] > u
+        // Populate f_ with sample forward curve at time u and return index of first t[j] > u
         template<class R>
         size_t advance(T u, F* f_, R& r)
         {
-            auto tj = std::lower_bound(t.begin(), t.end(), u);
-            ensure(*tj >= u);
+            auto tj = std::upper_bound(t.begin(), t.end(), u);
+            // tj[-1] <= u < tj[0];
+            ensure (tj != t.end());
             auto j = tj - t.begin();
 
             B.advance(u, r);
             for (auto k = j; k < t.size(); ++k) {
                 // futures
                 f_[k] = phi[k]*exp(sigma[k]*B[k] - sigma[k]*sigma[k]*u/2);
-                // convexity adjustment
-                f_[k] -= sigma[k]*sigma[k]*(t[k-1] - u)*(t[k-1] - u)/2;
+                // forward convexity adjustment
+                auto dt = t[k-1] - u; // k-th future settles at t[k-1]
+                f_[k] -= sigma[k]*sigma[k]*dt*dt/2;
             }
 
             return j; 
         }
     };
-
 }

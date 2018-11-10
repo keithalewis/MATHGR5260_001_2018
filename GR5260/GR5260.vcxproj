@@ -168,6 +168,7 @@
     <ClInclude Include="fms_brownian.h" />
     <ClInclude Include="fms_root1d.h" />
     <ClInclude Include="fms_root1d_newton.h" />
+    <ClInclude Include="fms_swaption.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fms_fixed_income_zero.h" />

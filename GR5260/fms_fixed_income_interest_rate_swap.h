@@ -1,7 +1,7 @@
 // fms_fixed_income_interest_rate_swap.h - interest rates wap maturing at time u with coupon r and frequency f.
 // t_j = j/f, j = 0, 1, ..., n = f*u
-// C_j = r/f 0 < j < n
 // C_0 = -1
+// C_j = r/f, 0 < j < n
 // C_n = 1 + r*/f
 #pragma once
 #include <vector>
@@ -27,6 +27,16 @@ namespace fms::fixed_income {
                 c[i] = r/static_cast<U>(f);
             }
             c.back() += 1;
+        }
+        // F^delta(t_0,...,t_n) = (1 - D(t_n)/sum_1^n delta_j D(t_j)
+        // ??? Assume the daycount fraction is delta_j = t[j-1] - t[j].
+        C par_coupon(const std::function<C(U)>& D)
+        {
+            C c = C(0);
+
+            //??? Calculate the par coupon assuming D is the discount.
+
+            return c;
         }
     private:
         size_t _size() const override 
