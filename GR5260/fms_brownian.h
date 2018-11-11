@@ -29,11 +29,12 @@ namespace fms {
         template<class R> // random engine
         void advance(X u, R& r)
         {
-            std::normal_distribution<X> Z(0, sqrt(u - t));
+            std::normal_distribution<X> Z;
+            X srt = sqrt(u - t);
 
             // B += e . dB
             for (size_t i = 0; i < B.size(); ++i) {
-                auto dB = Z(r);
+                auto dB = srt*Z(r);
                 for (size_t j = i; j < B.size(); ++j) {
                     B[j] += e(j, i)*dB;
                 }

@@ -13,6 +13,7 @@
 #include "fms_bootstrap.h"
 #include "fms_fixed_income.h"
 #include "fms_ho_lee.h"
+#include "fms_swaption.h"
 
 using namespace fms;
 
@@ -554,9 +555,9 @@ void test_fms_pwflat_bootstrap()
     auto fra2 = forward_rate_agreement<X,X>(1.5,1.75,r);
     auto fra3 = forward_rate_agreement<X,X>(1.75,2.,r);
 
-    auto irs0 = interest_rate_swap(3, r, frequency::semiannual);
-    auto irs1 = interest_rate_swap(5, r, frequency::quarterly);
-    auto irs2 = interest_rate_swap(10, r, frequency::monthly);
+    auto irs0 = interest_rate_swap<X,X>(3, r, frequency::semiannual);
+    auto irs1 = interest_rate_swap<X,X>(5, r, frequency::quarterly);
+    auto irs2 = interest_rate_swap<X,X>(10, r, frequency::monthly);
 
     {    
        auto [t,f] = bootstrap(f0.present_value(cd0), cd0, curve(T.size(), T.data(), F.data()));
@@ -761,6 +762,24 @@ void test_fms_correlation()
 
 }
 
+template<class X>
+void test_fms_swaption()
+{
+    std::vector<X> t(20), phi(20), sigma(20);
+    X corr[] = {X(0.1),X(0.2),X(0.3)};
+    auto freq = fms::fixed_income::frequency::semiannual;
+
+    for (size_t i = 0; i < t.size(); ++i) {
+        t[i] = (i + 1)/X(freq);
+        phi[i] = X(0.05);
+        sigma[i] = X(0.01);
+    }
+
+    fms::lmm<X,X> lmm(t.size(), t.data(), phi.data(), sigma.data(), fms::correlation<X>(3, corr));
+    X pv = fms::swaption<X,X>(3, freq, X(0.05), 4, lmm);
+    pv = pv;
+}
+
 int main()
 {
 //    test_intB<double>();
@@ -791,4 +810,6 @@ int main()
     test_fms_pwflat_bootstrap<double>();
 
     test_fms_ho_lee<double>();
+
+    test_fms_swaption<double>();
 }
