@@ -30,7 +30,7 @@ namespace fms {
             
             // Initial forward curve
             lmm.reset();
-            lmm.advance(0, f.data(), dre);
+             lmm.advance(0, f.data(), dre);
 
             // Deterministic discount to first futures settlement.
             F Dt = pwflat::discount(lmm.t[0], lmm.size(), lmm.t.data(), f.data());

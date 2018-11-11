@@ -774,7 +774,7 @@ void test_fms_swaption()
         sigma[i] = X(0.01);
     }
 
-    fms::lmm<X,X> lmm(t.size(), t.data(), phi.data(), sigma.data(), fms::correlation<X>(3, corr));
+    fms::lmm<X,X> lmm(t.size(), t.data(), phi.data(), sigma.data(), fms::correlation<X>(t.size(), 3, corr));
     X pv = fms::swaption<X,X>(3, freq, X(0.05), 4, lmm);
     pv = pv;
 }

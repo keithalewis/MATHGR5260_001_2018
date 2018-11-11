@@ -37,7 +37,8 @@ namespace fms {
 
         lmm(size_t n, const T* t, const F* phi, const F* sigma, const correlation<F>& e)
             : t(t, t + n), phi(phi, phi + n), sigma(sigma, sigma + n), B(e)
-        { }
+        {
+        }
 
         size_t size() const
         {
