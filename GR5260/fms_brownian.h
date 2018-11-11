@@ -29,22 +29,32 @@ namespace fms {
         template<class R> // random engine
         void advance(X u, R& r)
         {
-            std::normal_distribution<X> Z(0, sqrt(u - t));
+            X sqrdt = sqrt(u - t);
+            std::normal_distribution<X> Z;
 
             // B += e . dB
-            for (size_t i = 0; i < B.size(); ++i) {
-                auto dB = Z(r);
-                for (size_t j = i; j < B.size(); ++j) {
-                    B[j] += e(j, i)*dB;
+            // [ e_00 0 ... 0 ] [dB_1]
+            // [ e_10 e_11 ...] [...]
+            // [ ....           [dB_d
+            // B[j] += e_j0 dB_0 + ... e_jd dB_d
+            for (size_t k = 0; k < e.dimension(); ++k) {
+                auto dB = sqrdt*Z(r);
+                for (size_t j = 0; j < B.size(); ++j) {
+                    B[j] += e(j, k)*dB;
                 }
             }
 
             t = u;
         }
-        // number of dimensions
+        // Size of Brownian sample vector.
         size_t size() const
         {
             return B.size();
+        }
+        // Dimension of correlation.
+        size_t dimension() const
+        {
+            return e.dimension();
         }
         const X* data() const
         {

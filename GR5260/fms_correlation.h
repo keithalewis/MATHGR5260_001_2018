@@ -1,5 +1,6 @@
 // correlation.h - correlation matrices
 #pragma once
+#include <algorithm>
 #include <vector>
 
 /*
@@ -7,6 +8,18 @@ An n x n correlation matrix, rho, is determined by n unit vectors (e_j).
 The i,j entry in the matrix rho_{j,k} = e_j . e_k, the dot product
 of the two unit vectors. Conversely, given any correlation matrix
 the Cholesky decomposition has row vectors of unit norm.
+
+If the unit vectors lie in a d-dimensional sphere the Cholesky factor has the form
+
+[ 1    0    0 ... 0 ]
+[ e_21 e_22 0 ... 0 ]
+[ ...
+[ e_d1 e_d2 ... e_dd]
+[ ...
+[ e_n1 e_n2 ... e_nd]
+
+assuming 1-based indexing.
+
 */
 
 namespace fms {
@@ -23,30 +36,50 @@ namespace fms {
         };
         correlation()
         { }
-        correlation(size_t n, const X* e, layout type = packed)
+        correlation(size_t n, size_t d, const X* e, layout type = packed)
             : e_(n)
         {
             if (n == 0)
                 return;
 
-            e_[0] = std::vector<X>{X(1)};
+            e_[0] = std::vector<X>(d);
+            e_[0][0] = X(1);
 
-            for (size_t i = 1; i < n; ++i) {
-                e_[i] = std::vector<X>(i+1);
+            size_t off = 0;
+            for (size_t i = 1; i < d; ++i) {
+                e_[i] = std::vector<X>(d);
                 X e2 = X(0);
                 for (size_t j = 0; j < i; ++j) {
-                    size_t off = (type != packed ? (i - 1)*(n - 1) : (i*(i-1))/2);
                     X eij = e[off + j];
                     e_[i][j] = eij;
                     e2 += eij * eij;
                 }
                 e_[i][i] = sqrt(1 - e2); // NaN if e2 > 1
+                off += type == packed ? i : d - 1;
+            }
+            for (size_t i = d; i < n; ++i) {
+                e_[i] = std::vector<X>(d);
+                X e2 = X(0);
+                for (size_t j = 0; j < d - 1; ++j) {
+                    X eij = e[off + j];
+                    e_[i][j] = eij;
+                    e2 += eij * eij;
+                }
+                e_[i][i] = sqrt(1 - e2); // NaN if e2 > 1
+                off += d - 1;
             }
         }
 
+        // Size of correlation matrix.
         size_t size() const
         {
             return e_.size();
+        }
+
+        // Dimension of sphere.
+        size_t dimension() const
+        {
+            return e_[0].size();
         }
 
         // i,j entry
@@ -58,20 +91,7 @@ namespace fms {
         // correlation
         X rho(size_t i, size_t j) const
         {
-            //ensure(i < n && j < n);
-
-            if (i > j) {
-                std::swap(i, j);
-            }
-
-            X r{0};
-            const auto& e_i = e_[i];
-            const auto& e_j = e_[j];
-            for (size_t k = 0; k <= i; ++k) {
-                r += e_i[k]*e_j[k];
-            }
-
-            return r;
+            return std::inner_product(e_[i].begin(), e_[i].end(), e_[j].begin(), X(0));
         }
     };
 }

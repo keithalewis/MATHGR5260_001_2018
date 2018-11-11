@@ -103,7 +103,7 @@ namespace fms::ho_lee {
     Recall the forward at time t over [u,v] is F^delta_t(u,v) = (D_t(u)/D_t(v) - 1)/dcf
     where dcf is the day count fraction corresponding to delta, u, and v;
 
-    The floor value is
+    The floorlet value is
 
         E max{k - F,0} D_v = E max{k - (1/D_u(v) - 1)/dcf, 0} D_v
                            = E E_u max{k - (1/D_u(v) - 1)/dcf, 0} D_v
