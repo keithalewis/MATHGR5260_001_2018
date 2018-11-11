@@ -652,27 +652,34 @@ void test_fms_brownian()
 }
 /*
 // int_0^1 B_s ds
-template<class X>
-inline X intB(size_t n)
+template<class X, class R>
+inline X intB(size_t n, R& rng)
 {
     X dt = X(1)/n;
-    std::default_random_engine dre;
     std::normal_distribution<X> dB(0,sqrt(dt));
 
     X B = X(0);
+    X intBds = X(0);
     for (size_t i = 0; i < n; ++i) {
-        B += dB(dre);
+        B += dB(rng);
+        intBds += B*dt;
     }
-    return B;
+
+    return intBds;
 }
+
 // Var int_0^1 B_s ds = 1/3
 template<class X>
 inline void test_intB()
 {
-   size_t N = 5000;
-   std::function<X()> f = [N]() { X B = intB<X>(N); return B*B; };
-   auto var = mean(f, N);
-   var = var;
+    std::default_random_engine dre;
+    unsigned int now = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+    dre.seed(now);
+    size_t n = 100;
+    size_t N = 5000;
+    std::function<X()> f = [n,N,&dre]() { X B = intB<X>(n,dre); return B*B; };
+    auto var = mean(f, N);
+    assert (fabs(var - X(1)/3) < 2/sqrt(N));
 }
 */
 template<class X>
@@ -775,7 +782,7 @@ void test_fms_swaption()
     }
 
     fms::lmm<X,X> lmm(t.size(), t.data(), phi.data(), sigma.data(), fms::correlation<X>(t.size(), 3, corr));
-    X pv = fms::swaption<X,X>(3, freq, X(0.05), 4, lmm);
+    X pv = fms::swaption<X,X>(3, freq, X(0.05), 4, lmm, 1);
     pv = pv;
 }
 
