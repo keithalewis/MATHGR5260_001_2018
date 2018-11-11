@@ -628,7 +628,7 @@ void test_fms_brownian()
 {
     // Show corr(B_1[j], B_1[k]) = rho_{j,k}
     X e[] = {X(0.1), X(0.2), X(0.3)};
-    fms::correlation<X> corr(3, e); // packed
+    fms::correlation<X> corr(3, 3, e); // packed
     // Cholesky decompostion is
     // [ 1   0               0                      ]
     // [ 0.1 sqrt(1 - 0.1^2) 0                      ]
@@ -718,13 +718,13 @@ void test_fms_correlation()
         fms::correlation<> corr;
     }
     {
-        fms::correlation<> corr(1, nullptr);
+        fms::correlation<> corr(1, 1, nullptr);
         ensure (corr.size() == 1);
         ensure (corr.rho(0, 0) == 1);
     }
     {
         double rho = 0.5;
-        fms::correlation<> corr(2, &rho, fms::correlation<>::packed);
+        fms::correlation<> corr(2, 2, &rho, fms::correlation<>::packed);
         ensure (corr.size() == 2);
         ensure (corr.rho(0, 0) == 1);
         ensure (corr.rho(0, 1) == 0.5);
@@ -733,7 +733,7 @@ void test_fms_correlation()
     }
     {
         double rho[] = {0.5,  0.4, 0.3};
-        fms::correlation<> corr(3, rho);
+        fms::correlation<> corr(3, 3, rho);
         ensure (corr.size() == 3);
         ensure (corr.rho(0, 0) == 1);
         ensure (corr.rho(0, 1) == 0.5);
@@ -741,13 +741,13 @@ void test_fms_correlation()
         ensure (corr.rho(1, 0) == 0.5);
         ensure (fabs(corr.rho(1, 1) - 1) <= eps);
         ensure (corr.rho(1, 2) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
-        ensure (corr.rho(2, 0) == 0.4);
-        ensure (corr.rho(2, 1) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
+        ensure (fabs(corr.rho(2, 0) - 0.4) <= eps);
+        ensure (fabs(corr.rho(2, 1) - (0.5*0.4 + sqrt(1-0.5*0.5)*0.3)) <= eps);
         ensure (fabs(corr.rho(2, 2) - 1) <= eps);
     }
     {
         double rho[] = {0.5, 0, 0.4, 0.3};
-        fms::correlation<> corr(3, rho, fms::correlation<>::lower);
+        fms::correlation<> corr(3, 3, rho, fms::correlation<>::lower);
         ensure (corr.size() == 3);
         ensure (corr.rho(0, 0) == 1);
         ensure (corr.rho(0, 1) == 0.5);
@@ -759,7 +759,6 @@ void test_fms_correlation()
         ensure (corr.rho(2, 1) == 0.5*0.4 + sqrt(1-0.5*0.5)*0.3);
         ensure (fabs(corr.rho(2, 2) - 1) <= eps);
     }
-
 }
 
 template<class X>
