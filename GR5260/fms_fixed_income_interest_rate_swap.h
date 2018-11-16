@@ -35,8 +35,11 @@ namespace fms::fixed_income {
             C c = C(0);
 
             //??? Calculate the par coupon assuming D is the discount.
+            for (size_t j = 1; j < t.size(); ++j) {
+                c += (t[j] - t[j-1])*D(t[j]);
+            }
 
-            return c;
+            return (1 - D(t.back())/c;
         }
     private:
         size_t _size() const override 
