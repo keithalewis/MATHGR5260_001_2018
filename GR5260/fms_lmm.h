@@ -2,6 +2,7 @@
 #pragma once
 #include <algorithm>
 #include "fms_brownian.h"
+#include "fms_pwflat.h"
 /*
 The LIBOR Market Model is parameterized by increasing times t_j,
 futures quotes phi_j, at-the-money caplet volatilities, sigma_j, 
@@ -27,21 +28,28 @@ curve at time t, s -> f_t(s). Note f_0(s) = f(s).
 
 namespace fms {
 
-    template<class T = double, class F = double, class R = std::default_random_engine>
-    class lmm {
+    template<class T = double, class F = double>
+    struct lmm {
         std::vector<T> t;
         std::vector<F> phi;
         std::vector<F> sigma;
-        std::brownian<F> B;
-    public:
-        //??? use rule of zero ???
-        lmm(size_t n, const T* t, const F* phi, const F* sigma, const correlation<F>& e, R r))
+        fms::brownian<F> B;
+
+        lmm(size_t n, const T* t, const F* phi, const F* sigma, const correlation<F>& e)
             : t(t, t + n), phi(phi, phi + n), sigma(sigma, sigma + n), B(e)
-        { }
+        {
+        }
+
+        size_t size() const
+        {
+            return t.size();
+        }
+
         void reset()
         {
             B.reset();
         }
+
         // Populate f_ with sample forward curve at time u and return index of first t[j] > u
         template<class R>
         size_t advance(T u, F* f_, R& r)
@@ -52,12 +60,14 @@ namespace fms {
             auto j = tj - t.begin();
 
             B.advance(u, r);
-            for (auto k = j; k < t.size(); ++k) {
+            for (size_t k = j; k < t.size(); ++k) {
                 // futures
                 f_[k] = phi[k]*exp(sigma[k]*B[k] - sigma[k]*sigma[k]*u/2);
                 // forward convexity adjustment
-                auto dt = t[k-1] - u; // k-th future settles at t[k-1]
-                f_[k] -= sigma[k]*sigma[k]*dt*dt/2;
+                if (k > 0) {
+                    auto dt = t[k-1] - u; // k-th future settles at t[k-1]
+                    f_[k] -= sigma[k]*sigma[k]*dt*dt/2;
+                }
             }
 
             return j; 

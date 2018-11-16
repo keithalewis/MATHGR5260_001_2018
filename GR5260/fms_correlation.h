@@ -65,7 +65,7 @@ namespace fms {
                     e_[i][j] = eij;
                     e2 += eij * eij;
                 }
-                e_[i][i] = sqrt(1 - e2); // NaN if e2 > 1
+                e_[i][d - 1] = sqrt(1 - e2); // NaN if e2 > 1
                 off += d - 1;
             }
         }

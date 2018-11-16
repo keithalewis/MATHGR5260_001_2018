@@ -13,6 +13,7 @@
 #include "fms_bootstrap.h"
 #include "fms_fixed_income.h"
 #include "fms_ho_lee.h"
+#include "fms_swaption.h"
 
 using namespace fms;
 
@@ -554,9 +555,9 @@ void test_fms_pwflat_bootstrap()
     auto fra2 = forward_rate_agreement<X,X>(1.5,1.75,r);
     auto fra3 = forward_rate_agreement<X,X>(1.75,2.,r);
 
-    auto irs0 = interest_rate_swap(3, r, frequency::semiannual);
-    auto irs1 = interest_rate_swap(5, r, frequency::quarterly);
-    auto irs2 = interest_rate_swap(10, r, frequency::monthly);
+    auto irs0 = interest_rate_swap<X,X>(3, r, frequency::semiannual);
+    auto irs1 = interest_rate_swap<X,X>(5, r, frequency::quarterly);
+    auto irs2 = interest_rate_swap<X,X>(10, r, frequency::monthly);
 
     {    
        auto [t,f] = bootstrap(f0.present_value(cd0), cd0, curve(T.size(), T.data(), F.data()));
@@ -651,27 +652,34 @@ void test_fms_brownian()
 }
 /*
 // int_0^1 B_s ds
-template<class X>
-inline X intB(size_t n)
+template<class X, class R>
+inline X intB(size_t n, R& rng)
 {
     X dt = X(1)/n;
-    std::default_random_engine dre;
     std::normal_distribution<X> dB(0,sqrt(dt));
 
     X B = X(0);
+    X intBds = X(0);
     for (size_t i = 0; i < n; ++i) {
-        B += dB(dre);
+        B += dB(rng);
+        intBds += B*dt;
     }
-    return B;
+
+    return intBds;
 }
+
 // Var int_0^1 B_s ds = 1/3
 template<class X>
 inline void test_intB()
 {
-   size_t N = 5000;
-   std::function<X()> f = [N]() { X B = intB<X>(N); return B*B; };
-   auto var = mean(f, N);
-   var = var;
+    std::default_random_engine dre;
+    unsigned int now = (unsigned int)std::chrono::system_clock::now().time_since_epoch().count();
+    dre.seed(now);
+    size_t n = 100;
+    size_t N = 5000;
+    std::function<X()> f = [n,N,&dre]() { X B = intB<X>(n,dre); return B*B; };
+    auto var = mean(f, N);
+    assert (fabs(var - X(1)/3) < 2/sqrt(N));
 }
 */
 template<class X>
@@ -760,6 +768,24 @@ void test_fms_correlation()
     }
 }
 
+template<class X>
+void test_fms_swaption()
+{
+    std::vector<X> t(20), phi(20), sigma(20);
+    X corr[] = {X(0.1),X(0.2),X(0.3)};
+    auto freq = fms::fixed_income::frequency::semiannual;
+
+    for (size_t i = 0; i < t.size(); ++i) {
+        t[i] = (i + 1)/X(freq);
+        phi[i] = X(0.05);
+        sigma[i] = X(0.01);
+    }
+
+    fms::lmm<X,X> lmm(t.size(), t.data(), phi.data(), sigma.data(), fms::correlation<X>(t.size(), 3, corr));
+    X pv = fms::swaption<X,X>(3, freq, X(0.05), 4, lmm, 1);
+    pv = pv;
+}
+
 int main()
 {
 //    test_intB<double>();
@@ -790,4 +816,6 @@ int main()
     test_fms_pwflat_bootstrap<double>();
 
     test_fms_ho_lee<double>();
+
+    test_fms_swaption<double>();
 }

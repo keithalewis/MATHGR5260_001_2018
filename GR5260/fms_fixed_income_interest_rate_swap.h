@@ -13,24 +13,26 @@ namespace fms::fixed_income {
     class interest_rate_swap : public instrument<U,C> {
         U u;
         C r;
-        frequency f;
+        frequency q;
         std::vector<U> t;
         std::vector<C> c;
     public:
-        interest_rate_swap(U u, C r, frequency f)
-            : u(u), r(r), f(f), t(1 + static_cast<U>(f)*u), c(1 + static_cast<U>(f)*u)
+        interest_rate_swap(U u, C r, frequency q)
+            : u(u), r(r), q(q), t(static_cast<size_t>(1 + static_cast<U>(q)*u)), c(static_cast<size_t>(1 + static_cast<U>(q)*u))
         {
+            U dt = static_cast<U>(q);
+            dt = 1/dt;
             t[0] = 0;
             c[0] = -1;
             for (size_t i = 1; i < t.size(); ++i) {
-                t[i] = i/static_cast<U>(f);
-                c[i] = r/static_cast<U>(f);
+                t[i] = i*dt;
+                c[i] = r*dt;
             }
             c.back() += 1;
         }
         // F^delta(t_0,...,t_n) = (1 - D(t_n)/sum_1^n delta_j D(t_j)
-        // ??? Assume the daycount fraction is delta_j = t[j-1] - t[j].
-        C par_coupon(const std::function<C(U)>& D)
+        // ??? Assume the daycount fraction is delta_j = 1/q.
+        static C par_coupon(U u, frequency q, const std::function<C(U)>& D)
         {
             C c = C(0);
 
