@@ -4,6 +4,7 @@
 // C_j = r/f, 0 < j < n
 // C_n = 1 + r*/f
 #pragma once
+#include <functional>
 #include <vector>
 #include "fms_fixed_income_instrument.h"
 
@@ -30,19 +31,6 @@ namespace fms::fixed_income {
             }
             c.back() += 1;
         }
-        // F^delta(t_0,...,t_n) = (1 - D(t_n)/sum_1^n delta_j D(t_j)
-        // ??? Assume the daycount fraction is delta_j = 1/q.
-        static C par_coupon(U u, frequency q, const std::function<C(U)>& D)
-        {
-            C c = C(0);
-
-            //??? Calculate the par coupon assuming D is the discount.
-            for (size_t j = 1; j < t.size(); ++j) {
-                c += (t[j] - t[j-1])*D(t[j]);
-            }
-
-            return (1 - D(t.back())/c;
-        }
     private:
         size_t _size() const override 
         {
@@ -57,5 +45,19 @@ namespace fms::fixed_income {
             return c.data(); 
         }
     };
+
+    // F^delta(t_0,...,t_n) = (D(t_0) - D(t_n))/sum_1^n delta_j D(t_j)
+    template<class U = double, class C = double>
+    inline C par_coupon(const interest_rate_swap<U,C>& irs, const std::function<C(U)>& D)
+    {
+        C sum = C(0);
+        const U* u = irs.time();
+
+        for (size_t j = 1; j < irs.size(); ++j) {
+            sum += (u[j] - u[j - 1])*D(u[j]);
+        }
+
+        return (D(u[0]) - D(u[irs.size()- 1]))/sum;
+    }
 
 } // fms::fixed_income

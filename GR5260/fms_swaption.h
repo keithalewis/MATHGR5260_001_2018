@@ -15,7 +15,7 @@ namespace fms {
         auto Dt = D(t);
         // Discount curve at time t.
         std::function<F(T)> Du = [Dt,&D](T u) { return D(u)/Dt; };
-        F c = fixed_income::interest_rate_swap<T,F>::par_coupon(tenor, freq, Du);
+        F c = 0; //!!! not static fixed_income::interest_rate_swap<T,F>::par_coupon(tenor, freq, Du);
      
         return std::max(c - k, F(0));
     }
