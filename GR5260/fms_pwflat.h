@@ -3,14 +3,14 @@
     f(t) = f[i] if t[i-1] < t <= t[i]
          = _f   if t > t[n-1]
     and undefined if t < 0
-    Note f(0) = f[0].
+    Note f(0) = f[0] and f(t[i]) = f[i] for all i
 
     |                                   _f
     |        f[1]             f[n-1] (--------
-    | f[0] (----- ...       (------]
+    | f[0] (----- ...       (--------]
     [------]      ... ------]
     |
-    0-----t[0]--- ... ---t[n-2]---t[n-1]
+    0----t[0]--- ...  ---t[n-2]---t[n-1]
 */
 #pragma once
 #include <cmath>     // exp
@@ -134,7 +134,7 @@ namespace fms::pwflat {
         return d;
     }
 
-    // NVI instrument interface.
+    // NVI curve interface.
     template<class T = double, class F = double>
     class curve {
         size_t n;
