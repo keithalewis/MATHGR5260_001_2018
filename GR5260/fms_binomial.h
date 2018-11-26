@@ -37,6 +37,16 @@ namespace fms::binomial {
         }
     };
 
+    struct atom {
+        size_t j, k; // { W_k = j }
+    };
+    // all atoms of A_n contained in a
+    // atom(j, n) ... atom(j + n - k, n)
+    struct atoms {
+        atoms(const atom& a, size_t n)
+        { }
+    };
+
     // choose(N,k)/2^N = N/2k * N-1/2(k-1) * ... * N - k + 1/2 / 2^(N-k)
     template<size_t N, class X = double>
     constexpr X probability(size_t k) {
