@@ -49,7 +49,7 @@ namespace fms {
         // Size of Brownian sample vector.
         size_t size() const
         {
-            return B.size();
+            return e.size();
         }
         // Dimension of correlation.
         size_t dimension() const
