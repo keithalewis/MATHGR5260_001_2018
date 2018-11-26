@@ -75,6 +75,9 @@
     <ClInclude Include="fms_swaption.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fms_binomial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GR5260.cpp">

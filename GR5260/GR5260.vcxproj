@@ -166,6 +166,7 @@
     <ClInclude Include="fms_prob.h" />
     <ClInclude Include="fms_pwflat.h" />
     <ClInclude Include="fms_brownian.h" />
+    <ClInclude Include="fms_binomial.h" />
     <ClInclude Include="fms_root1d.h" />
     <ClInclude Include="fms_root1d_newton.h" />
     <ClInclude Include="fms_swaption.h" />
