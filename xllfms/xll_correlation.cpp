@@ -5,8 +5,6 @@
 using namespace fms;
 using namespace xll;
 
-//??? Implement the add-in FMS.CORRELATION that takes an n x d matrix in lower triangular form.
-//??? It should return a xll::handle<fms::correlation>.
 AddIn xai_fms_correlation(
     Function(XLL_HANDLE, L"?xll_fms_correlation", L"FMS.CORRELATION")
     .Arg(XLL_FP, L"matrix", L"is an n x d matix in lower triangular form.")
@@ -33,7 +31,6 @@ HANDLEX WINAPI xll_fms_correlation(_FP12* pm)
     return h;
 }
 
-//??? Implment FMS.CORRELATION.RHO that calls fms::correlation::rho.
 AddIn xai_fms_correlation_rho(
     Function(XLL_DOUBLE, L"?xll_fms_correlation_rho", L"FMS.CORRELATION.RHO")
     .Arg(XLL_HANDLE, L"handle", L"is handle to an fms::correlation object.")

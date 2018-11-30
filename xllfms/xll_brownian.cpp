@@ -1,12 +1,10 @@
 // xll_brownian.cpp
 #include <random>
 #include "../GR5260/fms_brownian.h"
-#include "../xll12/xll/xll.h"
+#include "xllfms.h"
 
 using namespace fms;
 using namespace xll;
-
-std::default_random_engine dre;
 
 AddIn xai_fms_brownian(
     Function(XLL_HANDLE, L"?xll_fms_brownian", L"FMS.BROWNIAN")
@@ -34,7 +32,7 @@ HANDLEX WINAPI xll_fms_brownian(HANDLEX c)
 
     return h;
 }
-// ??? Implement FMS.BROWNIAN.RESET
+
 AddIn xai_fms_brownian_reset(
     Function(XLL_HANDLE, L"?xll_fms_brownian_reset", L"FMS.BROWNIAN.RESET")
     .Arg(XLL_HANDLE, L"handle", L"is a handle to a fms::brownain object")
@@ -57,7 +55,6 @@ HANDLEX WINAPI xll_fms_brownian_reset(HANDLEX b)
     return b;
 }
 
-// ??? Implement FMS.BROWNIAN.ADVANCE
 AddIn xai_fms_brownian_advance(
     Function(XLL_HANDLE, L"?xll_fms_brownian_advance", L"FMS.BROWNIAN.ADVANCE")
     .Arg(XLL_HANDLE, L"handle", L"is a handle to a fms::brownian object")
@@ -72,7 +69,7 @@ HANDLEX WINAPI xll_fms_brownian_advance(HANDLEX b, double t)
     try {
         handle<fms::brownian<>> b_(b);
         ensure (b_);
-        b_->advance(t, dre);
+        b_->advance(t, fms::dre);
     }
     catch (const std::exception& ex) {
         XLL_ERROR(ex.what());
@@ -81,10 +78,6 @@ HANDLEX WINAPI xll_fms_brownian_advance(HANDLEX b, double t)
     return b;
 }
 
-// ??? Implement FMS.BROWNIAN.SAMPLE as a volatile function.
-// ??? It should take a handle returned by FMS.BROWNIAN and an array 
-// ??? of increasing times. Call reset and advance to return an m x n
-// ??? where m is the number of sample times and n is the size of fms::brownian.
 AddIn xai_fms_brownian_sample(
     Function(XLL_FP, L"?xll_fms_brownian_sample", L"FMS.BROWNIAN.SAMPLE")
     .Arg(XLL_HANDLE, L"handle", L"is a handle to a fms::brownain object")
@@ -105,7 +98,7 @@ _FP12* WINAPI xll_fms_brownian_sample(HANDLEX b, _FP12* pt)
         result.resize(size(*pt), b_->size());
         b_->reset();
         for (INT32 i = 0; i < size(*pt); ++i) {
-            b_->advance(pt->array[i], dre);
+            b_->advance(pt->array[i], fms::dre);
             std::copy(b_->data(), b_->data() + b_->size(),
                 result.array() + i * result.columns());
         }
