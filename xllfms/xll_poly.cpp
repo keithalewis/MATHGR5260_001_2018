@@ -12,7 +12,8 @@ AddIn xai_fms_poly_Bell(
     .Category(L"GR5260")
     .Documentation(
 LR"xyzzyx(
-Bell polynomials satisfy the recurrence relations <math>B<subscript>0</subscript> = 1</math> and
+Bell polynomials satisfy the recurrence relations 
+B<subscript>0</subscript> = 1 and
 <quote>
 B<subscript>n+1</subscript>(&#954;<subscript>1</subscript>,...,&#954;<subscript>n+1</subscript>)
 = &#8721;<superscript>n</superscript><subscript>k=0</subscript> C(n,k)
@@ -46,7 +47,8 @@ AddIn xai_fms_poly_Hermite(
     .Category(L"GR5260")
     .Documentation(
         LR"xyzzyx(
-Hermite polynomials satisfy the recurrence relations H<subscript>0</subscript>(x) = 1, 
+Hermite polynomials satisfy the recurrence relations 
+H<subscript>0</subscript>(x) = 1, 
 H<subscript>1</subscript>(x) = x, and 
 <quote>
 H<subscript>n + 1</subscript>(x) 

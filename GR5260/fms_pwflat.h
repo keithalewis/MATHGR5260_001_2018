@@ -1,8 +1,17 @@
-// fms_pwflat.h - piecewise flat curve
-/*
-    f(t) = f[i] if t[i-1] < t <= t[i]
+﻿// fms_pwflat.h - piecewise flat curve
+#pragma once
+#include <cmath>     // exp
+#include <algorithm> // adjacent_find
+#include <limits>    // quiet_Nan()
+#include <numeric>   // upper/lower_bound
+#include "fms_fixed_income_instrument.h"
+
+inline const wchar_t* fms_pwflat_doc = LR"xyzzyx(
+Piecewise flat (constant) curves. &#8712;
+<code>
+    f(t) = f[i] if t[i-1] &lt; t ≤ t[i]
          = _f   if t > t[n-1]
-    and undefined if t < 0
+    and undefined if t &lt; 0
     Note f(0) = f[0] and f(t[i]) = f[i] for all i
 
     |                                   _f
@@ -11,13 +20,8 @@
     [------]      ... ------]
     |
     0----t[0]--- ...  ---t[n-2]---t[n-1]
-*/
-#pragma once
-#include <cmath>     // exp
-#include <algorithm> // adjacent_find
-#include <limits>    // quiet_Nan()
-#include <numeric>   // upper/lower_bound
-#include "fms_fixed_income_instrument.h"
+</code>
+)xyzzyx";
 
 namespace fms::pwflat {
 

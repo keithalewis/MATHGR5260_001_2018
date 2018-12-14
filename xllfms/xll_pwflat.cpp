@@ -12,7 +12,7 @@ class AddIn xai_fms_pwflat_value(
     .Arg(XLL_DOUBLE, L"_f", L"is an optional forward to extrapolate the curve.")
     .Category(L"GR5260")
     .FunctionHelp(L"Return the value of a piecewise flat curve.")
-    .Documentation(LR"xyzzyx(The value is f[j] on (t[j-1], t[j]] ...)xyzzyx")
+    .Documentation(fms_pwflat_doc)
 );
 double WINAPI xll_fms_pwflat_value(double u, _FP12* pt, _FP12* pf, double _f)
 {
